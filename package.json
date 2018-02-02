@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dev": "cp netlify/_redirects public/_redirects && cp -r node_modules/@webcomponents/webcomponentsjs public/build/libs/webcomponentsjs && cp -r node_modules/@lamplightdev/compost/src public/build/libs/compost && workbox copyLibraries public/build/libs",
-    "build": "cp netlify/_redirects public/_redirects && mkdir -p public/build/libs && cp -r node_modules/@webcomponents/webcomponentsjs public/build/libs/webcomponentsjs && cp -r node_modules/@lamplightdev/compost/src public/build/libs/compost && workbox copyLibraries public/build/libs && rollup -c"
+    "build": "mkdir -p public/build/libs && cp -r node_modules/@webcomponents/webcomponentsjs public/build/libs/webcomponentsjs && cp -r node_modules/@lamplightdev/compost/src public/build/libs/compost && workbox copyLibraries public/build/libs && workbox injectManifest workbox-config.js && rollup -c"
   },
   "repository": {
     "type": "git",
