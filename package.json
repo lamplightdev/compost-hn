@@ -1,0 +1,30 @@
+{
+  "name": "compost-hn",
+  "version": "1.0.1",
+  "description": "A HackerNews PWA built using Compost",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "cp netlify/_redirects public/_redirects && cp -r node_modules/@webcomponents/webcomponentsjs public/build/libs/webcomponentsjs && cp -r node_modules/@lamplightdev/compost/src public/build/libs/compost && workbox copyLibraries public/build/libs",
+    "build": "cp netlify/_redirects public/_redirects && mkdir -p public/build/libs && cp -r node_modules/@webcomponents/webcomponentsjs public/build/libs/webcomponentsjs && cp -r node_modules/@lamplightdev/compost/src public/build/libs/compost && workbox copyLibraries public/build/libs && rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lamplightdev/compost-hn.git"
+  },
+  "author": "Chris Haynes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lamplightdev/compost-hn/issues"
+  },
+  "homepage": "https://github.com/lamplightdev/compost-hn#readme",
+  "dependencies": {
+    "@lamplightdev/compost": "^1.0.0",
+    "@webcomponents/webcomponentsjs": "^1.1.0"
+  },
+  "devDependencies": {
+    "rollup": "^0.55.1",
+    "rollup-plugin-uglify": "^3.0.0",
+    "workbox-cli": "^3.0.0-beta.0"
+  }
+}
