@@ -6,8 +6,8 @@ class Router extends CompostMixin(HTMLElement) {
       path: {
         type: String,
         value: null,
-        observer: 'observePath',
       },
+
       defaultPage: {
         type: String,
         value: null,
@@ -15,28 +15,58 @@ class Router extends CompostMixin(HTMLElement) {
     };
   }
 
+  constructor() {
+    super();
+
+    this.onNavigate = this.onNavigate.bind(this);
+  }
+
   connectedCallback() {
     super.connectedCallback();
 
-    requestAnimationFrame(() => {
-      this.path = window.location.pathname;
-      this.updatePath(this.path);
-    });
+    this.on(this, 'x-update-path', this.updatePath);
+    window.addEventListener('popstate', this.onNavigate);
+
+    this.onNavigate();
   }
 
-  observePath(oldValue, newValue) {
-    if (newValue) {
-      history.pushState({}, '', newValue);
-    }
+  disconnectedCallback() {
+    this.off(this, 'x-update-path', this.updatePath);
+    window.removeEventListener('popstate', this.onNavigate);
   }
 
-  updatePath(path) {
-    const [, page, subPage] = path.split('/');
+  onNavigate() {
+    this.path = window.location.pathname;
 
+    const [, page, subPage] = this.path.split('/');
     this.fire('x-update-path', {
       page: page || this.defaultPage,
-      subPage: subPage || 0,
+      subPage,
+      replace: true,
     });
+  }
+
+  updatePath(event) {
+    const { page, subPage, replace } = event.detail;
+    this.path = `/${page}/${subPage || ''}`;
+
+    if (replace) {
+      history.replaceState({}, '', this.path);
+    } else {
+      history.pushState({}, '', this.path);
+    }
+
+    const app = this.$('slot').assignedNodes()[1];
+
+    app.currentPage = {
+      id: page,
+      subId: subPage || 0,
+      params: event.detail.params || {},
+    };
+  }
+
+  render() {
+    return `<slot></slot>`;
   }
 }
 

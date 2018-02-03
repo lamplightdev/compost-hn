@@ -25,7 +25,11 @@
     <!--script type="module" src="./components/app.js"></script-->
   </head>
   <body>
-    <x-app></x-app>
+    <x-router
+      default-page="top"
+    >
+      <x-app></x-app>
+    </x-router>
 
     <script>
       window.addEventListener('WebComponentsReady', function () {

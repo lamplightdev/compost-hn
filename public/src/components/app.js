@@ -43,12 +43,6 @@ class App extends CompostMixin(HTMLElement) {
     }
   }
 
-  constructor() {
-    super();
-
-    this.on(this, 'x-update-path', this.updatePath);
-  }
-
   render() {
     return `
       <style>
@@ -59,11 +53,6 @@ class App extends CompostMixin(HTMLElement) {
           margin: 0 auto;
         }
       </style>
-
-      <x-router
-        id="router"
-        default-page="top"
-      ></x-router>
 
       <x-nav></x-nav>
       <x-view id="view"></x-view>
@@ -77,17 +66,6 @@ class App extends CompostMixin(HTMLElement) {
   observeCurrentPage(oldValue, newValue) {
     this.$('x-nav').current = newValue.id;
     this.$('x-view').current = newValue;
-  }
-
-  updatePath(event) {
-    const { page, subPage } = event.detail;
-    this.$id.router.path = `/${page}/${subPage || ''}`;
-
-    this.currentPage = {
-      id: page,
-      subId: subPage || 0,
-      params: event.detail.params || {},
-    };
   }
 }
 
