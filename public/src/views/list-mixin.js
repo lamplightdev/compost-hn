@@ -179,12 +179,14 @@ const ListMixin = (parent) => {
           // check we are on the same page as when the request was started
           // else we'll clobber the current page with a previous page's results
           if (this.active && start === this.startIndex * this._limit) {
-            this.items = result.items;
+            requestAnimationFrame(() => {
+              this.items = result.items;
 
-            if (limit < this._limit) {
-              const newLimit = Math.min(limit + this._batchSize, this._limit);
-              return this._loadStoryBatches(start, newLimit);
-            }
+              if (limit < this._limit) {
+                const newLimit = Math.min(limit + this._batchSize, this._limit);
+                return this._loadStoryBatches(start, newLimit);
+              }
+            });
           }
         });
     }
