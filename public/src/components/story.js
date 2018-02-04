@@ -32,6 +32,7 @@ class Story extends CompostMixin(HTMLElement) {
 
         #number {
           display: flex;
+          flex-shrink: 0;
           align-items: flex-start;
           justify-content: center;
 
