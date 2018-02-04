@@ -19,18 +19,6 @@ class Loading extends CompostMixin(HTMLElement) {
           display: flex;
           align-items: center;
           justify-content: center;
-
-          animation: rotation 2s infinite linear;
-        }
-
-        @keyframes rotation {
-		      from {
-				    transform: rotate(0deg);
-          }
-
-		      to {
-				    transform: rotate(359deg);
-		      }
         }
 
         :host(.hide) {
@@ -40,11 +28,10 @@ class Loading extends CompostMixin(HTMLElement) {
         img {
           width: 20px;
           height: auto;
-          margin-top: -6px;
         }
       </style>
 
-      <img src="/images/logo.svg" alt="Loading...">
+      <img src="/images/loading.svg" alt="Loading...">
     `;
   }
 

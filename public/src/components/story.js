@@ -24,13 +24,27 @@ class Story extends CompostMixin(HTMLElement) {
       <style>
         ${globalStyles}
         :host {
-          display: block;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
           margin: 0 0 2rem 0;
+        }
+
+        #number {
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+
+          font-size: 2rem;
+          width: 4rem;
+          margin-top: -0.7rem;
         }
 
         h4 {
           margin: 0 0 0.5rem 0;
+          color: #333;
           font-weight: 500;
+          font-size: 1rem;
         }
 
         h4 a {
@@ -43,11 +57,12 @@ class Story extends CompostMixin(HTMLElement) {
         }
       </style>
 
-      <h4><span id="number"></span>. <a id="title" href=""></a></h4>
+      <div id="number"></div>
       <div>
+        <h4><a id="title" href=""></a></h4>
         <span id="score"></span> points by <a id="by" href=""></a>
         <span id="time"></span>
-        | <a href="" id="comments" on-click="navigate"><span id="kids"></span> comments</a>
+        | <a href="" id="comments" on-click="navigate"></a>
       </div>
     `;
   }
@@ -61,8 +76,8 @@ class Story extends CompostMixin(HTMLElement) {
     this.$id.by.href = `https://news.ycombinator.com/user?id=${newValue.by}`;
     this.$id.by.textContent = newValue.by;
     this.$id.time.textContent = DateUtils.toRelative(newValue.time * 1000);
+    this.$id.comments.textContent = newValue.kids ? (`${newValue.kids.length || 0} comment${newValue.kids.length === 1 ? '' : 's'}`) : '0 comments';
     this.$id.comments.href = `/story/${newValue.id}`;
-    this.$id.kids.textContent = newValue.descendants || 0;
   }
 
   observeIndex(oldValue, newValue) {

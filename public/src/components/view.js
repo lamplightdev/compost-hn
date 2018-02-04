@@ -5,6 +5,7 @@ import '../views/show.js';
 import '../views/ask.js';
 import '../views/job.js';
 import '../views/story.js';
+import '../views/about.js';
 
 class View extends CompostMixin(HTMLElement) {
   static get properties() {
@@ -41,6 +42,7 @@ class View extends CompostMixin(HTMLElement) {
       <x-view-ask class="view" id="ask" hidden></x-view-ask>
       <x-view-job class="view" id="job" hidden></x-view-job>
       <x-view-story class="view" id="story" hidden></x-view-story>
+      <x-view-about class="view" id="about" hidden></x-view-about>
     `;
   }
 

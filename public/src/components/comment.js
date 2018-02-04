@@ -1,5 +1,7 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
+import DateUtils from '../utility/date.js';
 import API from '../utility/api.js';
+import globalStyles from '../utility/styles.js';
 import './comments.js';
 
 class Comment extends CompostMixin(HTMLElement) {
@@ -35,6 +37,7 @@ class Comment extends CompostMixin(HTMLElement) {
   render() {
     return `
       <style>
+        ${globalStyles}
         #text {
           padding-bottom: 1rem;
           margin-bottom: 1rem;
@@ -47,6 +50,9 @@ class Comment extends CompostMixin(HTMLElement) {
       </style>
 
       <div id="top">
+        <div id="info">
+          by <a id="by" href=""></a> <span id="time"></span>
+        </div>
         <div id="text"></div>
         <button id="commentstoggle" on-click="toggleComments" hidden>[+]</button>
       </div>
@@ -58,6 +64,10 @@ class Comment extends CompostMixin(HTMLElement) {
   observeData(oldValue, newValue) {
     if (newValue.text) {
       this.$id.top.classList.remove('hide');
+
+      this.$id.by.href = `https://news.ycombinator.com/user?id=${newValue.by}`;
+      this.$id.by.textContent = newValue.by;
+      this.$id.time.textContent = DateUtils.toRelative(newValue.time * 1000);
     } else {
       this.$id.top.classList.add('hide');
     }

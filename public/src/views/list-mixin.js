@@ -80,14 +80,10 @@ const ListMixin = (parent) => {
             text-decoration: none;
           }
 
-          .pages a.loadnext {
-            transform: rotate(180deg);
-          }
-
-          .pages > span {
+          .pages .pagenav {
             display: flex;
             align-items: center;
-            padding: 0 0.5rem;
+            padding: 0.5rem;
           }
 
           #pages-top {
@@ -109,17 +105,17 @@ const ListMixin = (parent) => {
 
         <div>
           <div class="pages" id="pages-top">
-            <a class="loadprevious" href="" on-click="loadPrevious" hidden>◀</a>
-            <span><span class="currentpage"></span> / <span class="totalpages"></span></span>
-            <a class="loadnext" href="" on-click="loadNext">◀</a>
+            <a class="loadprevious" href="" on-click="loadPrevious" hidden>&lt;</a>
+            <span class="pagenav"><span class="currentpage"></span> / <span class="totalpages"></span></span>
+            <a class="loadnext" href="" on-click="loadNext">&gt;</a>
           </div>
 
           <x-stories id="stories"></x-stories>
 
           <div class="pages" id="pages-bottom">
-            <a class="loadprevious" href="" on-click="loadPrevious" hidden>◀</a>
-            <span><span class="currentpage"></span> / <span class="totalpages"></span></span>
-            <a class="loadnext" href="" on-click="loadNext">◀</a>
+            <a class="loadprevious" href="" on-click="loadPrevious" hidden>&lt;</a>
+            <span class="pagenav"><span class="currentpage"></span> / <span class="totalpages"></span></span>
+            <a class="loadnext" href="" on-click="loadNext">&gt;</a>
           </div>
         </div>
       `;
