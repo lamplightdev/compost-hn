@@ -1,4 +1,5 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
+import DateUtils from '../utility/date.js';
 import globalStyles from '../utility/styles.js';
 
 class Story extends CompostMixin(HTMLElement) {
@@ -46,7 +47,7 @@ class Story extends CompostMixin(HTMLElement) {
       <div>
         <span id="score"></span> points by <a id="by" href=""></a>
         <span id="time"></span>
-        | <a href="" on-click="navigate"><span id="kids"></span> comments</a>
+        | <a href="" id="comments" on-click="navigate"><span id="kids"></span> comments</a>
       </div>
     `;
   }
@@ -59,7 +60,8 @@ class Story extends CompostMixin(HTMLElement) {
     this.$id.score.textContent = newValue.score;
     this.$id.by.href = `https://news.ycombinator.com/user?id=${newValue.by}`;
     this.$id.by.textContent = newValue.by;
-    this.$id.time.textContent = new Date(newValue.time * 1000).toLocaleDateString();
+    this.$id.time.textContent = DateUtils.toRelative(newValue.time * 1000);
+    this.$id.comments.href = `/story/${newValue.id}`;
     this.$id.kids.textContent = newValue.descendants || 0;
   }
 
@@ -72,7 +74,7 @@ class Story extends CompostMixin(HTMLElement) {
 
     this.fire('x-update-path', {
       page: 'story',
-      params: this.data,
+      subPage: this.data.id,
     });
   }
 }

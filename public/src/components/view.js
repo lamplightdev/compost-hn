@@ -14,7 +14,6 @@ class View extends CompostMixin(HTMLElement) {
         value: {
           id: null,
           subId: null,
-          params: {}
         },
         observer: 'observeCurrent',
       },
@@ -51,8 +50,12 @@ class View extends CompostMixin(HTMLElement) {
         view.hidden = false;
         view.active = true;
 
-        this.$id[newValue.id].startIndex = newValue.subId;
-        this.$id[newValue.id].params = newValue.params;
+        if (view.id === 'story') {
+          this.$id[newValue.id].storyId = newValue.subId;
+        } else {
+          this.$id[newValue.id].startIndex = newValue.subId;
+        }
+
       } else {
         view.hidden = true;
         view.active = false;

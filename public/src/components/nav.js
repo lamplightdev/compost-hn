@@ -25,11 +25,29 @@ class Nav extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
       <style>
         :host {
           display: flex;
+          align-items: center;
           justify-content: space-between;
 
-          background-color: steelblue;
+          background-color: #86AB83;
+        }
+
+        #logo {
+          padding: 5px;
+          background-color: white;
+          margin-left: 1rem;
+          display: flex;
+          align-items: center;
+          border-radius: 3px;
+        }
+
+        #logo img {
+          height: 20px;
+          width: auto;
         }
       </style>
+      <div id="logo">
+        <img src="/images/logo.svg" alt="compost">
+      </div>
     `, `
       <x-nav-item></x-nav-item>
     `);

@@ -54,7 +54,7 @@ class NavItem extends CompostMixin(HTMLElement) {
           display: flex;
           align-items: center;
           padding: 1rem 0.5rem;
-          border-bottom: 3px solid steelblue;
+          border-bottom: 3px solid transparent;
         }
 
         a.current {

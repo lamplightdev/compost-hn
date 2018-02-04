@@ -61,7 +61,6 @@ class Router extends CompostMixin(HTMLElement) {
     app.currentPage = {
       id: page,
       subId: subPage || 0,
-      params: event.detail.params || {},
     };
   }
 

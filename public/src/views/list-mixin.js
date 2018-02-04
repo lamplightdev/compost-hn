@@ -1,6 +1,8 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
+import '../components/loading.js';
 import API from '../utility/api.js';
 import '../components/stories.js';
+import globalStyles from '../utility/styles.js';
 
 const ListMixin = (parent) => {
   return class extends CompostMixin(parent) {
@@ -24,6 +26,12 @@ const ListMixin = (parent) => {
           observer: 'observeStartIndex',
         },
 
+        totalItems: {
+          type: Number,
+          value: 0,
+          observer: 'observeTotalItems',
+        },
+
         active: {
           type: Boolean,
           value: false,
@@ -38,7 +46,6 @@ const ListMixin = (parent) => {
       this._api = new API();
       this._limit = 30;
       this._batchSize = 1;
-      this._totalItems = 0;
 
       this._type = 'new';
     }
@@ -46,71 +53,86 @@ const ListMixin = (parent) => {
     render() {
       return `
         <style>
-          .show-if-loading {
-            display: none;
-          }
+          ${globalStyles}
 
-          .show-if-loading.loading {
+          :host {
             display: block;
+            position: relative;
           }
 
-          .hide-if-loading.loading {
+          :host(.hide) {
             display: none;
           }
 
-          .buttons {
+          .pages {
             display: flex;
             justify-content: center;
+            align-items: center;
           }
 
-          .buttons a {
+          .pages.hide {
+            display: none;
+          }
+
+          .pages a {
             padding: 0.5rem;
             margin: 0 0.5rem;
+            text-decoration: none;
           }
 
-          #buttons-top {
+          .pages a.loadnext {
+            transform: rotate(180deg);
+          }
+
+          .pages > span {
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+          }
+
+          #pages-top {
             margin-bottom: 1rem;
           }
 
-          #buttons-bottom {
+          #pages-bottom {
             margin-top: 1rem;
+          }
+
+          x-loading {
+            position: absolute;
+            right: 0.5rem;
+            top: 0.5rem;
           }
         </style>
 
-        <div id="loading" class="show-if-loading">
-          Loading...
-        </div>
+        <x-loading></x-loading>
 
-        <div class="hide-if-loading">
-          <div class="buttons" id="buttons-top">
-            <a class="loadprevious" href="" on-click="loadPrevious" hidden>prev</a>
-            <a class="loadnext" href="" on-click="loadNext">next</a>
+        <div>
+          <div class="pages" id="pages-top">
+            <a class="loadprevious" href="" on-click="loadPrevious" hidden>◀</a>
+            <span><span class="currentpage"></span> / <span class="totalpages"></span></span>
+            <a class="loadnext" href="" on-click="loadNext">◀</a>
           </div>
 
           <x-stories id="stories"></x-stories>
 
-          <div class="buttons" id="buttons-bottom">
-            <a class="loadprevious" href="" on-click="loadPrevious" hidden>prev</a>
-            <a class="loadnext" href="" on-click="loadNext">next</a>
+          <div class="pages" id="pages-bottom">
+            <a class="loadprevious" href="" on-click="loadPrevious" hidden>◀</a>
+            <span><span class="currentpage"></span> / <span class="totalpages"></span></span>
+            <a class="loadnext" href="" on-click="loadNext">◀</a>
           </div>
         </div>
       `;
     }
 
     observeLoading(oldValue, newValue) {
-      const els = this.$$('.show-if-loading, .hide-if-loading');
-
-      if (newValue) {
-        els.forEach(el => el.classList.add('loading'));
-      } else {
-        els.forEach(el => el.classList.remove('loading'));
-      }
+      this.$$('x-loading').forEach(el => el.show = newValue);
     }
 
     observeItems(oldValue, newValue) {
       this.$id.stories.items = newValue;
 
-      if (this._totalItems <= (this.startIndex * this._limit) + this._limit) {
+      if (this.totalItems <= (this.startIndex * this._limit) + this._limit) {
         this.$$('.loadnext').forEach(el => el.hidden = true);
       } else {
         this.$$('.loadnext').forEach(el => el.hidden = false);
@@ -133,14 +155,29 @@ const ListMixin = (parent) => {
       }
     }
 
+    observeTotalItems(oldValue, newValue) {
+      if (newValue) {
+        this.$$('.pages').forEach(el => el.classList.remove('hide'));
+        this.$$('.totalpages').forEach((el) => {
+          el.textContent = Math.ceil(newValue / this._limit);
+        });
+      } else {
+        this.$$('.pages').forEach(el => el.classList.add('hide'));
+      }
+    }
+
     observeActive(oldValue, newValue) {
       if (newValue) {
+        this.classList.remove('hide');
         this._updateLinks();
         this._loadStories();
+      } else {
+        this.classList.add('hide');
       }
     }
 
     _updateLinks() {
+      this.$$('.currentpage').forEach(el => el.textContent = this.startIndex + 1);
       this.$$('.loadprevious').forEach(el => {
         el.href = `${this._type}/${this.startIndex - 1}`;
       });
@@ -169,13 +206,14 @@ const ListMixin = (parent) => {
     }
 
     _loadStories() {
+      this.loading = true;
       this._loadStoryBatches(this.startIndex * this._limit, this._batchSize);
     }
 
     _loadStoryBatches(start, limit) {
       return this._api.getStories(this._type, start, limit)
         .then((result) => {
-          this._totalItems = result.total;
+          this.totalItems = result.total;
           // check we are on the same page as when the request was started
           // else we'll clobber the current page with a previous page's results
           if (this.active && start === this.startIndex * this._limit) {
@@ -185,6 +223,8 @@ const ListMixin = (parent) => {
               if (limit < this._limit) {
                 const newLimit = Math.min(limit + this._batchSize, this._limit);
                 return this._loadStoryBatches(start, newLimit);
+              } else {
+                this.loading = false;
               }
             });
           }

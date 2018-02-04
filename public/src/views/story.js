@@ -12,10 +12,10 @@ class Story extends CompostMixin(HTMLElement) {
         observer: 'observeLoading',
       },
 
-      params: {
-        type: Object,
-        value: {},
-        observer: 'observeParams',
+      storyId: {
+        type: Number,
+        value: null,
+        observer: 'observeStoryId',
       },
 
       active: {
@@ -61,13 +61,15 @@ class Story extends CompostMixin(HTMLElement) {
 
   }
 
-  observeParams(oldValue, newValue) {
+  observeStoryId(oldValue, newValue) {
     if (this.active) {
-      this.$id.title.textContent = newValue.title;
-      this.$id.title.href = newValue.url;
+      this._api.getItem(newValue).then((story) => {
+        this.$id.title.textContent = story.title;
+        this.$id.title.href = story.url;
 
-      this.$id.comment.data = newValue;
-      this.$id.comment.showComments = true;
+        this.$id.comment.data = story;
+        this.$id.comment.showComments = true;
+      });
     } else {
       this.$id.comment.showComments = false;
     }
@@ -75,7 +77,7 @@ class Story extends CompostMixin(HTMLElement) {
 
   observeActive(oldValue, newValue) {
     if (!newValue) {
-      this.params = {};
+      this.storyId = null;
     }
   }
 }

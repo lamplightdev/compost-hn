@@ -36,7 +36,6 @@ class App extends CompostMixin(HTMLElement) {
         value: {
           id: null,
           subId: null,
-          params: {},
         },
         observer: 'observeCurrentPage',
       }
