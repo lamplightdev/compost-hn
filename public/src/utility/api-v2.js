@@ -12,7 +12,7 @@ const _cache = {
 
 class API {
   constructor() {
-    this._apiRoot = 'http://node-hnapi.herokuapp.com';
+    this._apiRoot = 'https://node-hnapi.herokuapp.com';
   }
 
   async getItem(id) {
