@@ -20,8 +20,8 @@
     </style>
 
     <!--script src="/build/libs/webcomponentsjs/custom-elements-es5-adapter.js"></script-->
-    <!--script src="/build/libs/webcomponentsjs/webcomponents-loader.js"></script-->
-    <script src="/build/app.js"></script>
+    <script src="/build/libs/webcomponentsjs/webcomponents-loader.js"></script>
+    <!--script src="./build/app.js"></script-->
     <!--script type="module" src="./components/app.js"></script-->
   </head>
   <body>
@@ -32,13 +32,11 @@
     </x-router>
 
     <script>
-      /*
       window.addEventListener('WebComponentsReady', function () {
         var script = document.createElement('script');
         script.src = '/build/app.js';
         document.querySelector('head').appendChild(script);
       });
-      */
 
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
