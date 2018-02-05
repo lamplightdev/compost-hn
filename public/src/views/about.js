@@ -5,6 +5,7 @@ class About extends CompostMixin(HTMLElement) {
   render() {
     return `
       <style>
+        ${globalStyles}
         a {
           color: #86AB83;
         }

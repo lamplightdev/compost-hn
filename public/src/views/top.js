@@ -4,7 +4,7 @@ class Top extends ListMixin(HTMLElement) {
   constructor() {
     super();
 
-    this._type = 'top';
+    this._type = 'news';
   }
 }
 

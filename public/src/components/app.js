@@ -63,6 +63,8 @@ class App extends CompostMixin(HTMLElement) {
   }
 
   observeCurrentPage(oldValue, newValue) {
+    window.scrollTo(0, 0);
+
     this.$('x-nav').current = newValue.id;
     this.$('x-view').current = newValue;
   }

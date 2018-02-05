@@ -1,6 +1,4 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
-import DateUtils from '../utility/date.js';
-import API from '../utility/api.js';
 import globalStyles from '../utility/styles.js';
 import './comments.js';
 
@@ -9,7 +7,7 @@ class Comment extends CompostMixin(HTMLElement) {
     return {
       data: {
         type: Object,
-        value: {},
+        value: null,
         observer: 'observeData'
       },
 
@@ -27,31 +25,42 @@ class Comment extends CompostMixin(HTMLElement) {
     };
   }
 
-  constructor() {
-    super();
-
-    this._api = new API();
-    this._batchSize = 1;
-  }
-
   render() {
     return `
       <style>
         ${globalStyles}
-        #text {
-          padding-bottom: 1rem;
+        :host {
+          color: #333;
+          font-size: 0.9rem;
           margin-bottom: 1rem;
-          border-bottom: 1px solid steelblue;
+          border-bottom: 1px solid #ddd;
+        }
+
+        #info {
+          color: #666;
+          font-weight: bold;
+          margin-bottom: 1rem;
         }
 
         .hide {
           display: none;
         }
+
+        button {
+          margin-bottom: 0.5rem;
+          font-size: 1rem;
+          border: 0;
+          box-shadow: none;
+          background: transparent;
+          color: #333;
+          padding: 0;
+          cursor: pointer;
+        }
       </style>
 
       <div id="top">
         <div id="info">
-          by <a id="by" href=""></a> <span id="time"></span>
+          <a id="by" href=""></a> <span id="time"></span>
         </div>
         <div id="text"></div>
         <button id="commentstoggle" on-click="toggleComments" hidden>[+]</button>
@@ -62,23 +71,20 @@ class Comment extends CompostMixin(HTMLElement) {
   }
 
   observeData(oldValue, newValue) {
-    if (newValue.text) {
-      this.$id.top.classList.remove('hide');
+    if (!newValue) return;
 
-      this.$id.by.href = `https://news.ycombinator.com/user?id=${newValue.by}`;
-      this.$id.by.textContent = newValue.by;
-      this.$id.time.textContent = DateUtils.toRelative(newValue.time * 1000);
-    } else {
-      this.$id.top.classList.add('hide');
-    }
+    this.$id.by.href = `https://news.ycombinator.com/user?id=${newValue.user}`;
+    this.$id.by.textContent = newValue.user;
+    this.$id.time.textContent = newValue.time_ago;
 
-    this.$id.text.innerHTML = newValue.text;
-    if (newValue.kids && newValue.kids.length) {
+    this.$id.text.innerHTML = newValue.content;
+    if (newValue.comments.length) {
       this.$id.commentstoggle.hidden = false;
     } else {
       this.$id.commentstoggle.hidden = true;
     }
 
+    this.$id.comments.items = newValue.comments;
     this.$id.comments.depth = this.depth;
   }
 
@@ -88,7 +94,6 @@ class Comment extends CompostMixin(HTMLElement) {
 
   observeShowComments(oldValue, newValue) {
     if (newValue) {
-      this._loadComments();
       this.$id.comments.classList.remove('hide');
       this.$id.commentstoggle.textContent = '[-]';
     } else {
@@ -99,26 +104,6 @@ class Comment extends CompostMixin(HTMLElement) {
 
   toggleComments() {
     this.showComments = !this.showComments;
-  }
-
-  _loadComments() {
-    this.$id.comments.items = [];
-
-    this._loadCommentBatches(0, this._batchSize);
-  }
-
-  _loadCommentBatches(start, limit) {
-    const kids = this.data.kids || [];
-
-    return this._api.getComments(kids.slice(start, limit))
-      .then((items) => {
-        this.$id.comments.items = items;
-
-        if (limit < kids.length) {
-          const newLimit = Math.min(limit + this._batchSize, kids.length);
-          return this._loadCommentBatches(start, newLimit);
-        }
-      });
   }
 }
 

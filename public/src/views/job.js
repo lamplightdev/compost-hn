@@ -4,7 +4,7 @@ class Job extends ListMixin(HTMLElement) {
   constructor() {
     super();
 
-    this._type = 'job';
+    this._type = 'jobs';
   }
 }
 

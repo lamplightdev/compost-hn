@@ -4,7 +4,7 @@ class New extends ListMixin(HTMLElement) {
   constructor() {
     super();
 
-    this._type = 'new';
+    this._type = 'newest';
   }
 }
 

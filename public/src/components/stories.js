@@ -5,7 +5,7 @@ import './story.js';
 class Stories extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
   static get properties() {
     return Object.assign(super.properties, {
-      startIndex: {
+      start: {
         type: Number,
         value: 0,
       },
@@ -25,7 +25,7 @@ class Stories extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
 
   updateItem(el, value, index) {
     el.data = value;
-    el.index = this.startIndex + index + 1;
+    el.index = this.start + index + 1;
   }
 }
 

@@ -29,6 +29,7 @@ class Nav extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
           justify-content: space-between;
 
           background-color: #86AB83;
+          margin-bottom: 1rem;
         }
 
         #logo {

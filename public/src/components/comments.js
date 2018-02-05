@@ -1,6 +1,5 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
 import CompostRepeatMixin from '../../build/libs/compost/repeat-mixin.js';
-import API from '../utility/api.js';
 import './comment.js';
 
 class Comments extends CompostRepeatMixin(CompostMixin(HTMLElement)) {

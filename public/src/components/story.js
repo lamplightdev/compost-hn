@@ -1,5 +1,4 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
-import DateUtils from '../utility/date.js';
 import globalStyles from '../utility/styles.js';
 
 class Story extends CompostMixin(HTMLElement) {
@@ -54,7 +53,7 @@ class Story extends CompostMixin(HTMLElement) {
 
         div {
           color: #666;
-          font-size: 14px;
+          font-size: 0.9rem;
         }
       </style>
 
@@ -64,6 +63,7 @@ class Story extends CompostMixin(HTMLElement) {
         <span id="score"></span> points by <a id="by" href=""></a>
         <span id="time"></span>
         | <a href="" id="comments" on-click="navigate"></a>
+        | <span id="domain"></span>
       </div>
     `;
   }
@@ -73,12 +73,13 @@ class Story extends CompostMixin(HTMLElement) {
     title.href = newValue.url;
     title.textContent = newValue.title;
 
-    this.$id.score.textContent = newValue.score;
-    this.$id.by.href = `https://news.ycombinator.com/user?id=${newValue.by}`;
-    this.$id.by.textContent = newValue.by;
-    this.$id.time.textContent = DateUtils.toRelative(newValue.time * 1000);
-    this.$id.comments.textContent = newValue.kids ? (`${newValue.kids.length || 0} comment${newValue.kids.length === 1 ? '' : 's'}`) : '0 comments';
+    this.$id.score.textContent = newValue.points;
+    this.$id.by.href = `https://news.ycombinator.com/user?id=${newValue.user}`;
+    this.$id.by.textContent = newValue.user;
+    this.$id.time.textContent = newValue.time_ago;
+    this.$id.comments.textContent = `${newValue.comments_count} comment${newValue.comments_count === 1 ? '' : 's'}`;
     this.$id.comments.href = `/story/${newValue.id}`;
+    this.$id.domain.textContent = newValue.domain;
   }
 
   observeIndex(oldValue, newValue) {

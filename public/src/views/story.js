@@ -1,6 +1,5 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
-import API from '../utility/api.js';
-import DateUtils from '../utility/date.js';
+import API from '../utility/api-v2.js'
 import globalStyles from '../utility/styles.js';
 import '../components/comments.js';
 
@@ -27,12 +26,6 @@ class Story extends CompostMixin(HTMLElement) {
     };
   }
 
-  constructor() {
-    super();
-
-    this._api = new API();
-  }
-
   render() {
     return `
       <style>
@@ -50,40 +43,61 @@ class Story extends CompostMixin(HTMLElement) {
         h2 {
           font-size: 18px;
         }
-      </style>
-      <h1><a id="title" href=""></a></h1>
-      <div>
-        <span id="score"></span> points by <a id="by" href=""></a>
-        <span id="time"></span>
-      </div>
-      <h2 id="commentscount"></h2>
 
-      <x-comment id="comment"></x-comment>
+        #summary {
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
+          color: #666;
+        }
+      </style>
+
+      <x-loading></x-loading>
+
+      <div id="detail">
+        <h1><a id="title" href=""></a></h1>
+        <div id="summary">
+          <span id="score"></span> points by <a id="by" href=""></a>
+          <span id="time"></span>
+          | <span id="commentscount"></span>
+          | <span id="domain"></span>
+        </div>
+
+        <x-comments id="comments"></x-comments>
+      </div>
     `;
   }
 
-  observeLoading(oldValue, newValue) {
+  constructor() {
+    super();
 
+    this._api = new API();
+  }
+
+  observeLoading(oldValue, newValue) {
+    this.$('x-loading').show = newValue;
+    this.$id.detail.hidden = newValue;
   }
 
   observeStoryId(oldValue, newValue) {
     if (this.active) {
+      this.loading = true;
+
       this._api.getItem(newValue).then((story) => {
         this.$id.title.textContent = story.title;
         this.$id.title.href = story.url;
 
-        this.$id.score.textContent = story.score;
-        this.$id.by.href = `https://news.ycombinator.com/user?id=${story.by}`;
-        this.$id.by.textContent = story.by;
-        this.$id.time.textContent = DateUtils.toRelative(story.time * 1000);
+        this.$id.score.textContent = story.points;
+        this.$id.by.href = `https://news.ycombinator.com/user?id=${story.user}`;
+        this.$id.by.textContent = story.user;
+        this.$id.time.textContent = story.time_ago;
 
-        this.$id.commentscount.textContent = story.kids ? (`${story.kids.length || 0} comment${story.kids.length === 1 ? '' : 's'}`) : '0 comments';
+        this.$id.commentscount.textContent = `${story.comments_count} comment${story.comments_count === 1 ? '' : 's'}`;
+        this.$id.domain.textContent = story.domain;
 
-        this.$id.comment.data = story;
-        this.$id.comment.showComments = true;
+        this.$id.comments.items = story.comments;
+
+        this.loading = false;
       });
-    } else {
-      this.$id.comment.showComments = false;
     }
   }
 

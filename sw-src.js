@@ -6,9 +6,4 @@ workbox.setConfig({
 
 workbox.precaching.precacheAndRoute([]);
 
-workbox.routing.registerRoute(
-  new RegExp('.*\.json'),
-  workbox.strategies.networkFirst()
-);
-
 workbox.routing.registerNavigationRoute('/index.html');
