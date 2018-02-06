@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-GB" dir="ltr">
   <head>
     <title>CompostHN</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="/manifest.json">
 
     <style>
       html {
@@ -17,6 +18,19 @@
       body {
         margin: 0;
       }
+
+      #no-js {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #no-js img {
+        width: 80px;
+        height: auto;
+        margin: 2rem 0;
+      }
     </style>
 
     <script src="/build/libs/webcomponentsjs/webcomponents-loader.js"></script>
@@ -25,7 +39,14 @@
     <x-router
       default-page="top"
     >
-      <x-app></x-app>
+      <x-app>
+        <div id="no-js">
+          <h1>Compost HN</h1>
+          <img src="/images/logo.svg" alt="">
+          <p>A HackerNews reader built using compost</p>
+          <p>Please enable JavaScript</p>
+        </div>
+      </x-app>
     </x-router>
 
     <script>

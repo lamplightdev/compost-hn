@@ -1,0 +1,9 @@
+{
+  "name": "CompostHN",
+  "short_name": "CompostHN",
+  "description": "A HackerNews reader, build using compost",
+  "lang": "en-GB",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#87aa84"
+}
