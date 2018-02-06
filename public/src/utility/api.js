@@ -1,3 +1,5 @@
+import fetch from 'unfetch';
+
 const _cache = {
   items: {},
   lists: {

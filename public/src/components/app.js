@@ -1,4 +1,4 @@
-// import 'babel-polyfill/dist/polyfill.js';
+import '../../build/libs/babel-polyfill/polyfill.js';
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
 import './router.js';
 import './nav.js';
