@@ -15,7 +15,6 @@ class Story extends CompostMixin(HTMLElement) {
       storyId: {
         type: Number,
         value: null,
-        observer: 'observeStoryId',
       },
 
       active: {
@@ -49,6 +48,10 @@ class Story extends CompostMixin(HTMLElement) {
           margin-bottom: 1rem;
           color: #666;
         }
+
+        #content {
+          margin-bottom: 2rem;
+        }
       </style>
 
       <x-loading></x-loading>
@@ -59,8 +62,10 @@ class Story extends CompostMixin(HTMLElement) {
           <span id="score"></span> points by <a id="by" href=""></a>
           <span id="time"></span>
           | <span id="commentscount"></span>
-          | <span id="domain"></span>
+          <span id="domain"></span>
         </div>
+
+        <div id="content"></div>
 
         <x-comments id="comments"></x-comments>
       </div>
@@ -78,11 +83,13 @@ class Story extends CompostMixin(HTMLElement) {
     this.$id.detail.hidden = newValue;
   }
 
-  observeStoryId(oldValue, newValue) {
-    if (this.active) {
+  observeActive(oldValue, newValue) {
+    if (!newValue) {
+      this.storyId = null;
+    } else {
       this.loading = true;
 
-      this._api.getItem(newValue).then((story) => {
+      this._api.getItem(this.storyId).then((story) => {
         this.$id.title.textContent = story.title;
         this.$id.title.href = story.url;
 
@@ -92,18 +99,19 @@ class Story extends CompostMixin(HTMLElement) {
         this.$id.time.textContent = story.time_ago;
 
         this.$id.commentscount.textContent = `${story.comments_count} comment${story.comments_count === 1 ? '' : 's'}`;
-        this.$id.domain.textContent = story.domain;
 
         this.$id.comments.items = story.comments;
 
+        if (story.content) {
+          this.$id.domain.textContent = '';
+          this.$id.content.innerHTML = story.content;
+        } else {
+        this.$id.domain.textContent = `| ${story.domain}`;
+          this.$id.content.innerHTML = '';
+        }
+
         this.loading = false;
       });
-    }
-  }
-
-  observeActive(oldValue, newValue) {
-    if (!newValue) {
-      this.storyId = null;
     }
   }
 }

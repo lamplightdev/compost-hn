@@ -63,7 +63,7 @@ class Story extends CompostMixin(HTMLElement) {
         <span id="score"></span> points by <a id="by" href=""></a>
         <span id="time"></span>
         | <a href="" id="comments" on-click="navigate"></a>
-        | <span id="domain"></span>
+        <span id="domain"></span>
       </div>
     `;
   }
@@ -79,7 +79,12 @@ class Story extends CompostMixin(HTMLElement) {
     this.$id.time.textContent = newValue.time_ago;
     this.$id.comments.textContent = `${newValue.comments_count} comment${newValue.comments_count === 1 ? '' : 's'}`;
     this.$id.comments.href = `/story/${newValue.id}`;
-    this.$id.domain.textContent = newValue.domain;
+
+    if (newValue.type !== 'ask') {
+      this.$id.domain.textContent = `| ${newValue.domain}`;
+    } else {
+      this.$id.domain.textContent = '';
+    }
   }
 
   observeIndex(oldValue, newValue) {
