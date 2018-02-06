@@ -38,7 +38,11 @@ class Router extends CompostMixin(HTMLElement) {
   onNavigate() {
     this.path = window.location.pathname;
 
-    const [, page, subPage] = this.path.split('/');
+    let [, page, subPage] = this.path.split('/');
+    if (page === 'index.html') {
+      page = '';
+    }
+
     this.fire('x-update-path', {
       page: page || this.defaultPage,
       subPage,
