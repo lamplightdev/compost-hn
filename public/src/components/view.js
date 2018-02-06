@@ -49,15 +49,13 @@ class View extends CompostMixin(HTMLElement) {
   observeCurrent(oldValue, newValue) {
     [...this.$$('.view')].forEach((view) => {
       if (view.id === newValue.id) {
-        view.hidden = false;
-        view.active = true;
-
         if (view.id === 'story') {
           this.$id[newValue.id].storyId = newValue.subId;
         } else {
           this.$id[newValue.id].startIndex = newValue.subId;
         }
-
+        view.hidden = false;
+        view.active = true;
       } else {
         view.hidden = true;
         view.active = false;

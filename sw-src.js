@@ -6,4 +6,9 @@ workbox.setConfig({
 
 workbox.precaching.precacheAndRoute([]);
 
+workbox.routing.registerRoute(
+  new RegExp('https://node-hnapi.herokuapp.com/.*'),
+  workbox.strategies.networkFirst()
+);
+
 workbox.routing.registerNavigationRoute('/index.html');

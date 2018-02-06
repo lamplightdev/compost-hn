@@ -35,9 +35,9 @@ class Story extends CompostMixin(HTMLElement) {
           align-items: flex-start;
           justify-content: center;
 
-          font-size: 2rem;
-          width: 4rem;
-          margin-top: -0.7rem;
+          font-size: 1.7rem;
+          width: 3rem;
+          margin-top: -0.9rem;
         }
 
         h4 {

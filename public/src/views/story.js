@@ -1,5 +1,5 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
-import API from '../utility/api-v2.js'
+import API from '../utility/api.js'
 import globalStyles from '../utility/styles.js';
 import '../components/comments.js';
 

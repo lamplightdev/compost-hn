@@ -1,6 +1,6 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
 import '../components/loading.js';
-import API from '../utility/api-v2.js';
+import API from '../utility/api.js';
 import '../components/stories.js';
 import globalStyles from '../utility/styles.js';
 
@@ -22,14 +22,7 @@ const ListMixin = (parent) => {
 
         startIndex: {
           type: Number,
-          value: 0,
           observer: 'observeStartIndex',
-        },
-
-        totalItems: {
-          type: Number,
-          value: 0,
-          // observer: 'observeTotalItems',
         },
 
         active: {
@@ -108,13 +101,13 @@ const ListMixin = (parent) => {
       this.$id.previous.href = `/${this.id}/${newValue - 1}`;
       this.$id.more.href = `/${this.id}/${newValue + 1}`;
 
-      if (this.active) {
-        if (newValue === 0) {
-          this.$id.previous.hidden = true;
-        } else {
-          this.$id.previous.hidden = false;
-        }
+      if (newValue === 0) {
+        this.$id.previous.hidden = true;
+      } else {
+        this.$id.previous.hidden = false;
+      }
 
+      if (this.active) {
         this._loadStories();
       }
     }

@@ -27,7 +27,7 @@ class Router extends CompostMixin(HTMLElement) {
     this.on(this, 'x-update-path', this.updatePath);
     window.addEventListener('popstate', this.onNavigate);
 
-    requestAnimationFrame(this.onNavigate);
+    this.onNavigate();
   }
 
   disconnectedCallback() {
