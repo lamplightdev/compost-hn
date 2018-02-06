@@ -3,7 +3,16 @@
   "short_name": "CompostHN",
   "description": "A HackerNews reader, build using compost",
   "lang": "en-GB",
-  "start_url": "/",
+  "start_url": "/top",
   "display": "standalone",
-  "theme_color": "#87aa84"
+  "theme_color": "#87aa84",
+  "icons": [
+    {
+      "src": "icon.png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512"
+    }
+  ]
 }
