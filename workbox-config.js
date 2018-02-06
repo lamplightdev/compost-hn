@@ -3,6 +3,8 @@ module.exports = {
   "globPatterns": [
     "build/app.js",
     "build/libs/webcomponentsjs/*.js",
+    "images/*",
+    "manifest.json",
     "index.html",
   ],
   "swDest": "public/sw.js",
