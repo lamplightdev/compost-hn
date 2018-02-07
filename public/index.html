@@ -133,11 +133,9 @@
         document.querySelector('head').appendChild(script);
 
         if ('serviceWorker' in navigator) {
-          setTimeout(() => {
-            window.addEventListener('load', () => {
-              navigator.serviceWorker.register('/sw.js');
-            });
-          }, 5000);
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+          });
         }
       });
     </script>
