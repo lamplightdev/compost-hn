@@ -91,7 +91,11 @@ class Story extends CompostMixin(HTMLElement) {
 
       this._api.getItem(this.storyId).then((story) => {
         this.$id.title.textContent = story.title;
-        this.$id.title.href = story.url;
+        if (story.url.indexOf('http') === 0) {
+          this.$id.title.href = story.url;
+        } else {
+          this.$id.title.href = `/story/${story.id}`;
+        }
 
         this.$id.score.textContent = story.points;
         this.$id.by.href = `https://news.ycombinator.com/user?id=${story.user}`;

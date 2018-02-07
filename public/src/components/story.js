@@ -38,6 +38,7 @@ class Story extends CompostMixin(HTMLElement) {
           font-size: 1.7rem;
           width: 3rem;
           margin-top: -0.9rem;
+          margin-right: 0.5rem;
         }
 
         h4 {
@@ -70,7 +71,12 @@ class Story extends CompostMixin(HTMLElement) {
 
   observeData(oldValue, newValue) {
     const title = this.$id.title;
-    title.href = newValue.url;
+
+    if (newValue.url.indexOf('http') === 0) {
+      title.href = newValue.url;
+    } else {
+      title.href = `/story/${newValue.id}`;
+    }
     title.textContent = newValue.title;
 
     this.$id.score.textContent = newValue.points;
@@ -80,7 +86,7 @@ class Story extends CompostMixin(HTMLElement) {
     this.$id.comments.textContent = `${newValue.comments_count} comment${newValue.comments_count === 1 ? '' : 's'}`;
     this.$id.comments.href = `/story/${newValue.id}`;
 
-    if (newValue.type !== 'ask') {
+    if (newValue.domain) {
       this.$id.domain.textContent = `| ${newValue.domain}`;
     } else {
       this.$id.domain.textContent = '';

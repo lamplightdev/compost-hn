@@ -34,17 +34,69 @@
         margin: 0;
       }
 
-      #no-js {
+      #no-js #content {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
       }
 
-      #no-js img {
+      #no-js #content img {
         width: 80px;
         height: auto;
         margin: 2rem 0;
+      }
+
+      #no-js #nav {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #86AB83;
+        margin-bottom: 1rem;
+      }
+
+      #no-js #nav #logo {
+        padding: 5px;
+        background-color: white;
+        margin-left: 1rem;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+      }
+
+      #no-js #nav #logo img {
+        height: 20px;
+        width: auto;
+      }
+
+      #no-js .nav-item {
+        display: flex;
+        flex-grow: 0;
+      }
+
+      #no-js .nav-item:last-child {
+        flex-grow: 1;
+        justify-content: flex-end;
+      }
+
+      #no-js .nav-item a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 1rem 0.5rem;
+        border-bottom: 3px solid transparent;
+      }
+
+      #no-js .nav-item.first a {
+        margin-left: 1rem;
+      }
+
+      #no-js .nav-item:last-child a {
+        margin-right: 1rem;
       }
     </style>
 
@@ -56,9 +108,20 @@
     >
       <x-app>
         <div id="no-js">
-          <h1>Compost HN</h1>
-          <img src="/images/logo.svg" alt="">
-          <p>A HackerNews reader built using compost</p>
+          <div id="nav">
+            <div id="logo"><img src="/images/logo.svg" alt=""></div>
+            <div class="nav-item first"><a href="/top">top</a></div>
+            <div class="nav-item"><a href="/new">new</a></div>
+            <div class="nav-item"><a href="/show">show</a></div>
+            <div class="nav-item"><a href="/ask">ask</a></div>
+            <div class="nav-item"><a href="/jobs">jobs</a></div>
+            <div class="nav-item"><a href="/about">about</a></div>
+          </div>
+
+          <div id="content">
+            <img src="/images/logo.svg" alt="">
+            <p>A HackerNews reader built using <a href="https://github.com/lamplightdev/compost">compost</a></p>
+          </div>
         </div>
       </x-app>
     </x-router>

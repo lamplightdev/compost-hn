@@ -27,7 +27,7 @@ class Loading extends CompostMixin(HTMLElement) {
 
         img {
           width: 20px;
-          height: auto;
+          height: 20px;
         }
       </style>
 

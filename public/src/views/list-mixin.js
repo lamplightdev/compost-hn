@@ -59,6 +59,10 @@ const ListMixin = (parent) => {
             margin: 1rem 0;
           }
 
+          x-stories.hide {
+            display: none;
+          }
+
           #paging {
             text-align: center;
           }
@@ -83,6 +87,12 @@ const ListMixin = (parent) => {
     observeLoading(oldValue, newValue) {
       this.$('x-loading').show = newValue;
       this.$id.paging.hidden = newValue;
+
+      if (newValue) {
+        this.$id.stories.classList.add('hide');
+      } else {
+        this.$id.stories.classList.remove('hide');
+      }
     }
 
     observeItems(oldValue, newValue) {
@@ -114,10 +124,10 @@ const ListMixin = (parent) => {
 
     observeActive(oldValue, newValue) {
       if (newValue) {
-        this._loadStories();
         this.classList.remove('hide');
       } else {
         this.classList.add('hide');
+        this.startIndex = null;
       }
     }
 
@@ -139,11 +149,13 @@ const ListMixin = (parent) => {
       });
     }
 
-    async _loadStories() {
-      this.items = [];
+     _loadStories() {
       this.loading = true;
-      this.items = await this._api.getList(this._type, this.startIndex + 1);
-      this.loading = false;
+
+      this._api.getList(this._type, this.startIndex + 1).then((items) => {
+        this.items = items;
+        this.loading = false;
+      });
     }
   };
 }

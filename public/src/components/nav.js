@@ -43,7 +43,22 @@ class Nav extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
 
         #logo img {
           height: 20px;
-          width: auto;
+          width: 20px;
+        }
+
+        ::slotted(x-nav-item) {
+          display: flex;
+          flex-grow: 0;
+        }
+
+        ::slotted(x-nav-item:first-of-type) {
+          margin-left: 1rem;
+        }
+
+        ::slotted(x-nav-item:last-child) {
+          margin-right: 1rem;
+          flex-grow: 1;
+          justify-content: flex-end;
         }
       </style>
       <div id="logo">

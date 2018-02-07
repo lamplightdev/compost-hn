@@ -30,24 +30,6 @@ class NavItem extends CompostMixin(HTMLElement) {
   render() {
     return `
       <style>
-        :host {
-          display: flex;
-          flex-grow: 0;
-        }
-
-        :host(:last-child) {
-          flex-grow: 1;
-          justify-content: flex-end;
-        }
-
-        :host(:first-child) a {
-          margin-left: 1rem;
-        }
-
-        :host(:last-child) a {
-          margin-right: 1rem;
-        }
-
         a {
           color: white;
           text-decoration: none;
