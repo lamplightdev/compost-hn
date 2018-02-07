@@ -69,7 +69,7 @@
 
       #no-js #nav #logo img {
         height: 20px;
-        width: auto;
+        width: 20px;
       }
 
       #no-js .nav-item {
@@ -131,13 +131,15 @@
         var script = document.createElement('script');
         script.src = '/build/app.js';
         document.querySelector('head').appendChild(script);
-      });
 
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js');
-        });
-      }
+        if ('serviceWorker' in navigator) {
+          setTimeout(() => {
+            window.addEventListener('load', () => {
+              navigator.serviceWorker.register('/sw.js');
+            });
+          }, 5000);
+        }
+      });
     </script>
   </body>
 </html>
