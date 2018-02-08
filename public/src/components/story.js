@@ -23,6 +23,7 @@ class Story extends CompostMixin(HTMLElement) {
       <style>
         ${globalStyles}
         :host {
+          contain: content;
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -70,6 +71,8 @@ class Story extends CompostMixin(HTMLElement) {
   }
 
   observeData(oldValue, newValue) {
+    if (!newValue.id) return;
+
     const title = this.$id.title;
 
     if (newValue.url.indexOf('http') === 0) {

@@ -31,6 +31,7 @@ class NavItem extends CompostMixin(HTMLElement) {
     return `
       <style>
         a {
+          contain: content;
           color: white;
           text-decoration: none;
           display: flex;

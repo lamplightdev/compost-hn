@@ -14,6 +14,12 @@ class Stories extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
 
   render() {
     return super.render(`
+      <style>
+        :host {
+          display: block;
+          contain: content;
+        }
+      </style>
     `, `
       <x-story></x-story>
     `);

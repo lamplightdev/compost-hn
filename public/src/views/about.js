@@ -6,6 +6,11 @@ class About extends CompostMixin(HTMLElement) {
     return `
       <style>
         ${globalStyles}
+        :host {
+          contain: content;
+          display: block;
+        }
+
         a {
           color: #86AB83;
         }

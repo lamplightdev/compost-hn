@@ -24,6 +24,7 @@ class Nav extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
     return super.render(`
       <style>
         :host {
+          contain: content;
           display: flex;
           align-items: center;
           justify-content: space-between;

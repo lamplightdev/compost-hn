@@ -31,6 +31,7 @@ class View extends CompostMixin(HTMLElement) {
     return `
       <style>
         :host {
+          contain: content;
           display: block;
           padding: 1rem;
         }

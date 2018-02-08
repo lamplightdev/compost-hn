@@ -30,6 +30,11 @@ class Story extends CompostMixin(HTMLElement) {
       <style>
         ${globalStyles}
 
+        :host {
+          contain: content;
+          display: block;
+        }
+
         h1 {
           font-size: 22px;
           line-height: 1.2;

@@ -16,6 +16,7 @@ class Loading extends CompostMixin(HTMLElement) {
     return `
       <style>
         :host {
+          contain: content;
           display: flex;
           align-items: center;
           justify-content: center;

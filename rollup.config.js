@@ -7,6 +7,6 @@ export default {
     format: 'iife',
   },
   plugins: [
-    uglify(),
+    // uglify(),
   ]
 };

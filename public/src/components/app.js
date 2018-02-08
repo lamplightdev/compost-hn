@@ -46,6 +46,7 @@ class App extends CompostMixin(HTMLElement) {
     return `
       <style>
         :host {
+          contain: content;
           display: flex;
           flex-direction: column;
           max-width: 1280px;

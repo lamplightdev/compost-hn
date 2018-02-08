@@ -30,6 +30,8 @@ class Comment extends CompostMixin(HTMLElement) {
       <style>
         ${globalStyles}
         :host {
+          contain: content;
+          display: block;
           color: #333;
           font-size: 0.9rem;
           margin-bottom: 1rem;

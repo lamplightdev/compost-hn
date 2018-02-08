@@ -130,6 +130,7 @@
       window.addEventListener('WebComponentsReady', function () {
         var script = document.createElement('script');
         script.src = '/build/app.js';
+        script.setAttribute('defer', '');
         document.querySelector('head').appendChild(script);
 
         if ('serviceWorker' in navigator) {

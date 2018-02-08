@@ -47,6 +47,7 @@ const ListMixin = (parent) => {
           ${globalStyles}
 
           :host {
+            contain: content;
             display: block;
             position: relative;
           }

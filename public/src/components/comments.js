@@ -17,6 +17,7 @@ class Comments extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
     return super.render(`
     <style>
       :host {
+        contain: content;
         display: flex;
         flex-direction: column;
       }
