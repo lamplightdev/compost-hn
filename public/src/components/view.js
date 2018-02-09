@@ -35,15 +35,19 @@ class View extends CompostMixin(HTMLElement) {
           display: block;
           padding: 1rem;
         }
+
+        .view.hide {
+          display: none;
+        }
       </style>
 
-      <x-view-top class="view" id="top" hidden></x-view-top>
-      <x-view-new class="view" id="new" hidden></x-view-new>
-      <x-view-show class="view" id="show" hidden></x-view-show>
-      <x-view-ask class="view" id="ask" hidden></x-view-ask>
-      <x-view-job class="view" id="job" hidden></x-view-job>
-      <x-view-story class="view" id="story" hidden></x-view-story>
-      <x-view-about class="view" id="about" hidden></x-view-about>
+      <x-view-top class="view" id="top"></x-view-top>
+      <x-view-new class="view" id="new"></x-view-new>
+      <x-view-show class="view" id="show"></x-view-show>
+      <x-view-ask class="view" id="ask"></x-view-ask>
+      <x-view-job class="view" id="job"></x-view-job>
+      <x-view-story class="view" id="story"></x-view-story>
+      <x-view-about class="view" id="about"></x-view-about>
     `;
   }
 
@@ -55,10 +59,10 @@ class View extends CompostMixin(HTMLElement) {
         } else {
           this.$id[newValue.id].startIndex = newValue.subId;
         }
-        view.hidden = false;
+        view.classList.remove('hide');
         view.active = true;
       } else {
-        view.hidden = true;
+        view.classList.add('hide');
         view.active = false;
       }
     });

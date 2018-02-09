@@ -52,10 +52,6 @@ const ListMixin = (parent) => {
             position: relative;
           }
 
-          :host(.hide) {
-            display: none;
-          }
-
           x-loading {
             margin: 1rem 0;
           }
@@ -124,10 +120,7 @@ const ListMixin = (parent) => {
     }
 
     observeActive(oldValue, newValue) {
-      if (newValue) {
-        this.classList.remove('hide');
-      } else {
-        this.classList.add('hide');
+      if (!newValue) {
         this.startIndex = null;
       }
     }
