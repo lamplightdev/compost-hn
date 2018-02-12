@@ -62,9 +62,9 @@ class Story extends CompostMixin(HTMLElement) {
       <x-loading></x-loading>
 
       <div id="detail">
-        <h1><a id="title" href=""></a></h1>
+        <h1><a id="title" href="" on-click="goToStory"></a></h1>
         <div id="summary">
-          <span id="score"></span> points by <a id="by" href=""></a>
+          <span id="score"></span> <a id="by" href=""></a>
           <span id="time"></span>
           | <span id="commentscount"></span>
           <span id="domain"></span>
@@ -102,9 +102,20 @@ class Story extends CompostMixin(HTMLElement) {
           this.$id.title.href = `/story/${story.id}`;
         }
 
-        this.$id.score.textContent = story.points;
-        this.$id.by.href = `https://news.ycombinator.com/user?id=${story.user}`;
-        this.$id.by.textContent = story.user;
+        if (story.points !== null) {
+          this.$id.score.textContent = `${story.points} points`;
+        } else {
+          this.$id.score.textContent = '';
+        }
+
+        if (story.user !== null) {
+          this.$id.by.href = `https://news.ycombinator.com/user?id=${story.user}`;
+          this.$id.by.textContent = `by ${story.user}`;
+        } else {
+          this.$id.by.href = '';
+          this.$id.by.textContent = '';
+        }
+
         this.$id.time.textContent = story.time_ago;
 
         this.$id.commentscount.textContent = `${story.comments_count} comment${story.comments_count === 1 ? '' : 's'}`;
@@ -122,6 +133,15 @@ class Story extends CompostMixin(HTMLElement) {
         this.loading = false;
       });
     }
+  }
+
+  goToStory(event) {
+    event.preventDefault();
+
+    this.fire('x-update-path', {
+      page: 'story',
+      subPage: this.storyId,
+    });
   }
 }
 

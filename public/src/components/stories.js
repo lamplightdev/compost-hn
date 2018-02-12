@@ -1,6 +1,8 @@
 import CompostMixin from '../../build/libs/compost/compost-mixin.js';
 import CompostRepeatMixin from '../../build/libs/compost/repeat-mixin.js';
-import './story.js';
+import './story-link.js';
+import './story-ask.js';
+import './story-job.js';
 
 class Stories extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
   static get properties() {
@@ -20,9 +22,19 @@ class Stories extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
           contain: content;
         }
       </style>
-    `, `
-      <x-story></x-story>
     `);
+  }
+
+  getTemplateString(value, index) {
+    let type = value.type;
+
+    if (type === 'link' && !value.domain) {
+      type = 'ask';
+    }
+
+    return `
+      <x-story-${type}></x-story-${type}>
+    `;
   }
 
   getKey(value, index) {

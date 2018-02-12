@@ -65,9 +65,13 @@ class Nav extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
       <div id="logo">
         <img src="/images/logo.svg" alt="compost">
       </div>
-    `, `
-      <x-nav-item></x-nav-item>
     `);
+  }
+
+  getTemplateString(value, key) {
+    return `
+      <x-nav-item></x-nav-item>
+    `;
   }
 
   getKey(value, index) {

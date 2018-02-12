@@ -26,9 +26,13 @@ class Comments extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
         margin-left: 1.5rem;
       }
     </style>
-    `, `
-      <x-comment></x-comment>
     `);
+  }
+
+  getTemplateString(value, index) {
+    return `
+      <x-comment></x-comment>
+    `;
   }
 
   getKey(value, index) {
