@@ -132,6 +132,7 @@
       }
 
       if (document.head.createShadowRoot || document.head.attachShadow) {
+        fetch('https://node-hnapi.herokuapp.com/news?page=1');
         loadScript('/build/app.js');
       } else {
         loadScript('/build/libs/webcomponentsjs/webcomponents-loader.js');
