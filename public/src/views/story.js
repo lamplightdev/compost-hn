@@ -62,7 +62,7 @@ class Story extends CompostMixin(HTMLElement) {
       <x-loading></x-loading>
 
       <div id="detail">
-        <h1><a id="title" href="" on-click="goToStory"></a></h1>
+        <h1><a id="title" href=""></a></h1>
         <div id="summary">
           <span id="score"></span> <a id="by" href=""></a>
           <span id="time"></span>
