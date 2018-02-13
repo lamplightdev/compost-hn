@@ -55,7 +55,9 @@ class App extends CompostMixin(HTMLElement) {
       </style>
 
       <x-nav></x-nav>
-      <x-view id="view"></x-view>
+      <main>
+        <x-view id="view"></x-view>
+      </main>
     `;
   }
 
