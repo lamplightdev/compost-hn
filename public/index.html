@@ -96,8 +96,6 @@
         margin-right: 1rem;
       }
     </style>
-
-    <script defer src="/build/libs/webcomponentsjs/webcomponents-loader.js"></script>
   </head>
   <body>
     <x-router
@@ -126,18 +124,27 @@
     </x-router>
 
     <script>
-      window.addEventListener('WebComponentsReady', function () {
-        var script = document.createElement('script');
-        script.src = '/build/app.js';
+      var loadScript = function (scriptName) {
+        const script = document.createElement('script');
+        script.src = scriptName;
         script.setAttribute('defer', '');
         document.querySelector('head').appendChild(script);
+      }
 
-        if ('serviceWorker' in navigator) {
-          customElements.whenDefined('x-app').then(() => {
-            navigator.serviceWorker.register('/sw.js');
-          });
-        }
-      });
+      if (document.head.createShadowRoot || document.head.attachShadow) {
+        loadScript('/build/app.js');
+      } else {
+        loadScript('/build/libs/webcomponentsjs/webcomponents-loader.js');
+        window.addEventListener('WebComponentsReady', function () {
+          loadScript('/build/app.js');
+        });
+      }
+
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
     </script>
   </body>
 </html>
