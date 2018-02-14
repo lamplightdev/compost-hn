@@ -1,3 +1,13 @@
+const functions = require('firebase-functions');
+const fetch = require('node-fetch');
+
+exports.preload = functions.https.onRequest((req, res) => {
+  fetch(url)
+    .then(response => response.json())
+    .then((items) => {
+      const now = Date.now();
+
+      res.status(200).send(`
 <!DOCTYPE html>
 <html lang="en-GB" dir="ltr">
   <head>
@@ -20,10 +30,12 @@
     <link rel="icon" href="/images/icon-512.png">
 
     <script>
+      /*
       var compostHnPreload = {
-        time: ${time},
+        time: ${now},
         list: ${items}
-      };
+      }
+      */;
     </script>
     <script async src="/build/app.js"></script>
 
@@ -155,3 +167,8 @@
     </script>
   </body>
 </html>
+
+      `);
+    });
+
+});
