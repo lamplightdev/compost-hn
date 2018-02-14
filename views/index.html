@@ -124,12 +124,16 @@
     </x-router>
 
     <script>
-      var retrieveTime = ${time};
-      var json = ${items};
+      var compostHnPreload = {
+        time: ${time},
+        list: ${items}
+      };
 
-      if (retrieveTime > (Date.now() - 1 * 60 * 1000)) {
-        document.querySelector('x-app').initialPageData = json;
+      /*
+      if (compostHn.time > (Date.now() - 1 * 60 * 1000)) {
+        document.querySelector('x-app').initialPageData = compostHn.list;
       }
+      */
 
       var loadScript = function (scriptName) {
         const script = document.createElement('script');

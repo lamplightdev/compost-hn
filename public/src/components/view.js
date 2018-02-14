@@ -18,11 +18,6 @@ class View extends CompostMixin(HTMLElement) {
         },
         observer: 'observeCurrent',
       },
-
-      initialPageData: {
-        type: Array,
-        value: [],
-      },
     };
   }
 
@@ -63,10 +58,6 @@ class View extends CompostMixin(HTMLElement) {
           this.$id[newValue.id].storyId = newValue.subId;
         } else {
           this.$id[newValue.id].startIndex = newValue.subId;
-
-          if (view.id === 'top') {
-            view.items = this.initialPageData;
-          }
         }
         view.classList.remove('hide');
         view.active = true;

@@ -9,6 +9,10 @@ const _cache = {
   },
 };
 
+if (compostHnPreload) {
+  _cache.lists.news[1] = compostHnPreload;
+}
+
 const cacheAge = 1000 * 60;
 
 class API {

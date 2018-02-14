@@ -38,13 +38,7 @@ class App extends CompostMixin(HTMLElement) {
           subId: null,
         },
         observer: 'observeCurrentPage',
-      },
-
-      initialPageData: {
-        type: Array,
-        value: [],
-        observer: 'observeInitialPageData',
-      },
+      }
     }
   }
 
@@ -76,10 +70,6 @@ class App extends CompostMixin(HTMLElement) {
 
     this.$('x-nav').current = newValue.id;
     this.$('x-view').current = newValue;
-  }
-
-  observeInitialPageData(oldValue, newValue) {
-    this.$('x-view').initialPageData = newValue;
   }
 }
 
