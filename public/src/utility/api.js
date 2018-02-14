@@ -9,7 +9,7 @@ const _cache = {
   },
 };
 
-if (compostHnPreload) {
+if (window.compostHnPreload) {
   _cache.lists.news[1] = compostHnPreload;
 }
 

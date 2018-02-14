@@ -19,6 +19,12 @@
 
     <link rel="icon" href="/images/icon-512.png">
 
+    <script>
+      var compostHnPreload = {
+        time: ${time},
+        list: ${items}
+      };
+    </script>
     <script src="/build/app.js"></script>
 
     <style>
@@ -126,11 +132,6 @@
     </x-router>
 
     <script>
-      var compostHnPreload = {
-        time: ${time},
-        list: ${items}
-      };
-
       var loadScript = function (scriptName) {
         const script = document.createElement('script');
         script.src = scriptName;
