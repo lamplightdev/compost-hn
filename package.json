@@ -20,7 +20,10 @@
   "homepage": "https://github.com/lamplightdev/compost-hn#readme",
   "dependencies": {
     "@lamplightdev/compost": "^1.1.5",
-    "@webcomponents/webcomponentsjs": "^1.1.0"
+    "@webcomponents/webcomponentsjs": "^1.1.0",
+    "express": "^4.16.2",
+    "express-es6-template-engine": "^2.0.2",
+    "node-fetch": "^2.0.0"
   },
   "devDependencies": {
     "rollup": "^0.55.5",

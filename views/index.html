@@ -124,6 +124,13 @@
     </x-router>
 
     <script>
+      var retrieveTime = ${time};
+      var json = ${items};
+
+      if (retrieveTime > (Date.now() - 1 * 60 * 1000)) {
+        document.querySelector('x-app').initialPageData = json;
+      }
+
       var loadScript = function (scriptName) {
         const script = document.createElement('script');
         script.src = scriptName;

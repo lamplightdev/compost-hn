@@ -143,7 +143,7 @@ const ListMixin = (parent) => {
       });
     }
 
-     _loadStories() {
+    _loadStories() {
       this.loading = true;
 
       this._api.getList(this._type, this.startIndex + 1).then((items) => {
