@@ -4,6 +4,10 @@ workbox.setConfig({
   modulePathPrefix: '/build/libs/workbox-v3.0.0-beta.0/'
 });
 
+workbox.precaching.precacheAndRoute([{
+  "url": "/",
+  "revision": "1"
+}]);
 workbox.precaching.precacheAndRoute([]);
 
 workbox.routing.registerRoute(
@@ -11,4 +15,4 @@ workbox.routing.registerRoute(
   workbox.strategies.networkFirst()
 );
 
-workbox.routing.registerNavigationRoute('/index.html');
+workbox.routing.registerNavigationRoute('/');
