@@ -23,6 +23,7 @@
   "dependencies": {
     "@lamplightdev/compost": "^1.1.5",
     "@webcomponents/webcomponentsjs": "^1.1.0",
+    "compression": "^1.7.1",
     "express": "^4.16.2",
     "express-es6-template-engine": "^2.0.2",
     "node-fetch": "^2.0.0",
@@ -30,6 +31,5 @@
     "rollup-plugin-uglify": "^3.0.0",
     "workbox-cli": "^3.0.0-beta.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

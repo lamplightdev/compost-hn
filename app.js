@@ -2,6 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const es6Renderer = require('express-es6-template-engine');
 const app = express();
+const compression = require('compression');
 
 const url = 'https://node-hnapi.herokuapp.com/news?page=1';
 const cacheAgeLimit = 1 * 60 * 1000;
@@ -14,6 +15,7 @@ app.engine('html', es6Renderer);
 app.set('views', 'views');
 app.set('view engine', 'html');
 app.use(express.static('public'));
+app.use(compression());
 
 app.get('*', (req, res) => {
   const now = Date.now();
