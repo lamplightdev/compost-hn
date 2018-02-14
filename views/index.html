@@ -19,6 +19,8 @@
 
     <link rel="icon" href="/images/icon-512.png">
 
+    <script src="/build/app.js"></script>
+
     <style>
       html {
         font-family: Roboto, -apple-system, sans-serif;
@@ -129,21 +131,14 @@
         list: ${items}
       };
 
-      /*
-      if (compostHn.time > (Date.now() - 1 * 60 * 1000)) {
-        document.querySelector('x-app').initialPageData = compostHn.list;
-      }
-      */
-
       var loadScript = function (scriptName) {
         const script = document.createElement('script');
         script.src = scriptName;
-        script.setAttribute('defer', '');
         document.querySelector('head').appendChild(script);
       }
 
       if (document.head.createShadowRoot || document.head.attachShadow) {
-        loadScript('/build/app.js');
+        // loadScript('/build/app.js');
       } else {
         loadScript('/build/libs/webcomponentsjs/webcomponents-loader.js');
         window.addEventListener('WebComponentsReady', function () {
