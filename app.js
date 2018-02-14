@@ -14,8 +14,8 @@ const cache = {
 app.engine('html', es6Renderer);
 app.set('views', 'views');
 app.set('view engine', 'html');
-app.use(express.static('public'));
 app.use(compression());
+app.use(express.static('public'));
 
 app.get('*', (req, res) => {
   const now = Date.now();
