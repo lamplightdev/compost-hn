@@ -4,6 +4,8 @@
   "description": "A HackerNews PWA built using Compost",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
+    "preinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "mkdir -p public/build/libs && cp -r node_modules/@webcomponents/webcomponentsjs/ public/build/libs/webcomponentsjs && cp -r node_modules/@lamplightdev/compost/src/ public/build/libs/compost && workbox copyLibraries public/build/libs&& rollup -c && workbox injectManifest ./workbox-config.js",
     "build:watch": "mkdir -p public/build/libs && cp -r node_modules/@webcomponents/webcomponentsjs/ public/build/libs/webcomponentsjs && cp -r node_modules/@lamplightdev/compost/src/ public/build/libs/compost && workbox copyLibraries public/build/libs&& rollup -c --watch && workbox injectManifest ./workbox-config.js"
