@@ -26,6 +26,7 @@
     "compression": "^1.7.1",
     "express": "^4.16.2",
     "express-es6-template-engine": "^2.0.2",
+    "express-https-redirect": "^1.0.0",
     "node-fetch": "^2.0.0",
     "rollup": "^0.55.5",
     "rollup-plugin-uglify": "^3.0.0",

@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 const es6Renderer = require('express-es6-template-engine');
 const app = express();
 const compression = require('compression');
+const httpsRedirect = require('express-https-redirect');
 
 const url = 'https://node-hnapi.herokuapp.com/news?page=1';
 const cacheAgeLimit = 1 * 60 * 1000;
@@ -11,12 +12,14 @@ const cache = {
   items: [],
 };
 
-app.engine('html', es6Renderer);
-app.set('views', 'views');
-app.set('view engine', 'html');
 app.use(compression({
   level: 9,
 }));
+app.use('/', httpsRedirect());
+app.engine('html', es6Renderer);
+app.set('views', 'views');
+app.set('view engine', 'html');
+
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
