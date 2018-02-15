@@ -1,5 +1,5 @@
 // import 'babel-polyfill/dist/polyfill.js';
-import CompostMixin from '../../build/libs/compost/compost-mixin.js';
+import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
 import './router.js';
 import './nav.js';
 import './view.js';

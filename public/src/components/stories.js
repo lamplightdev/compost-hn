@@ -1,5 +1,5 @@
-import CompostMixin from '../../build/libs/compost/compost-mixin.js';
-import CompostRepeatMixin from '../../build/libs/compost/repeat-mixin.js';
+import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
+import CompostRepeatMixin from '../../../node_modules/@lamplightdev/compost/src/repeat-mixin.js';
 import './story-link.js';
 import './story-ask.js';
 import './story-job.js';

@@ -13,7 +13,7 @@ if (window.compostHnPreload) {
   _cache.lists.news[1] = compostHnPreload;
 }
 
-const cacheAge = 1000 * 60;
+const cacheAge = 1000 * 60 * 10;
 
 class API {
   constructor() {

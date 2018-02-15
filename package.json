@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "postinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mkdir -p public/build/libs && cp -r node_modules/@webcomponents/webcomponentsjs/ public/build/libs/webcomponentsjs && cp -r node_modules/@lamplightdev/compost/src/ public/build/libs/compost && workbox copyLibraries public/build/libs&& rollup -c && workbox injectManifest ./workbox-config.js",
-    "build:watch": "mkdir -p public/build/libs && cp -r node_modules/@webcomponents/webcomponentsjs/ public/build/libs/webcomponentsjs && cp -r node_modules/@lamplightdev/compost/src/ public/build/libs/compost && workbox copyLibraries public/build/libs&& rollup -c --watch && workbox injectManifest ./workbox-config.js"
+    "build": "rollup -c && workbox copyLibraries build/public/libs"
   },
   "repository": {
     "type": "git",
@@ -22,15 +20,12 @@
   "homepage": "https://github.com/lamplightdev/compost-hn#readme",
   "dependencies": {
     "@lamplightdev/compost": "^1.1.5",
-    "@webcomponents/webcomponentsjs": "^1.1.0",
-    "compression": "^1.7.1",
-    "express": "^4.16.2",
-    "express-es6-template-engine": "^2.0.2",
-    "express-https-redirect": "^1.0.0",
-    "node-fetch": "^2.0.0",
+    "@webcomponents/webcomponentsjs": "^1.1.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^5.0.0",
     "rollup": "^0.55.5",
     "rollup-plugin-uglify": "^3.0.0",
     "workbox-cli": "^3.0.0-beta.0"
-  },
-  "devDependencies": {}
+  }
 }
