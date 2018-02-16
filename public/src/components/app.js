@@ -43,7 +43,7 @@ class App extends CompostMixin(HTMLElement) {
             ask: {},
             jobs: {},
           },
-          maxAge: 60 * 1000 * 10,
+          maxAge: 60 * 1000 * 1,
         },
       },
 

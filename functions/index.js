@@ -1,15 +1,12 @@
 const functions = require('firebase-functions');
 const fetch = require('node-fetch');
 
-
 exports.preload = functions.https.onRequest((req, res) => {
   const url = 'https://node-hnapi.herokuapp.com/news?page=1';
 
   fetch(url)
     .then(response => response.json())
     .then((items) => {
-      const now = Date.now();
-
       res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
       res.status(200).send(`<!DOCTYPE html>
 <html lang="en-GB" dir="ltr">
@@ -47,6 +44,7 @@ exports.preload = functions.https.onRequest((req, res) => {
       margin: 0;
     }
 
+    /* some style to render the shell before javascript laoded */
     #no-js #content {
       display: flex;
       flex-direction: column;
@@ -116,6 +114,7 @@ exports.preload = functions.https.onRequest((req, res) => {
 <body>
   <x-router default-page="top">
     <x-app>
+      <!-- fallback content -->
       <div id="no-js">
         <div id="nav">
           <div id="logo">
@@ -154,12 +153,15 @@ exports.preload = functions.https.onRequest((req, res) => {
   </x-router>
 
   <script>
+    // helper to dynamically load script
     var loadScript = function (scriptName) {
       const script = document.createElement('script');
       script.src = scriptName;
       document.querySelector('head').appendChild(script);
     }
 
+    // the comment below get's replaced in a production build with a preloaded
+    // list of items for the front page
     
       document.querySelector('x-app').cache = {
         items: {},
@@ -167,7 +169,7 @@ exports.preload = functions.https.onRequest((req, res) => {
           news: {
             '1': {
               list: ${JSON.stringify(items)},
-              time: ${now},
+              time: Date.now(),
             }
           },
           newest: {},
@@ -179,16 +181,19 @@ exports.preload = functions.https.onRequest((req, res) => {
       };
     
 
+    // cutting the mustard for native Web Component support
     if (document.head.createShadowRoot || document.head.attachShadow) {
-      loadScript('/js/app-1518796319138.js');
+      loadScript('/js/app-1518817709642.js');
     } else {
+      // use polyfill
       loadScript('/libs/webcomponentsjs/webcomponents-loader.js');
       window.addEventListener('WebComponentsReady', function () {
-        loadScript('/js/app-1518796319138.js');
+        loadScript('/js/app-1518817709642.js');
       });
     }
 
     if ('serviceWorker' in navigator) {
+      // wait until on load to register sw (helps initial load perf.)
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js');
       });
@@ -199,5 +204,4 @@ exports.preload = functions.https.onRequest((req, res) => {
 </html>
 `);
     });
-
 });
