@@ -1,6 +1,8 @@
 import StoryMixin from './story-mixin.js';
-import globalStyles from '../utility/styles.js';
 
+/**
+ * Element to story summary for 'link' type
+*/
 class StoryLink extends StoryMixin(HTMLElement) {
   render() {
     return `${super.render()}

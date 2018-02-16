@@ -1,4 +1,4 @@
-import CompostMixin from '../../build/libs/compost/compost-mixin.js';
+import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
 
 class NavItem extends CompostMixin(HTMLElement) {
   static get properties() {
@@ -23,8 +23,8 @@ class NavItem extends CompostMixin(HTMLElement) {
         type: Boolean,
         value: false,
         observer: 'observeCurrent',
-      }
-    }
+      },
+    };
   }
 
   render() {
@@ -67,6 +67,7 @@ class NavItem extends CompostMixin(HTMLElement) {
   navigate(event) {
     event.preventDefault();
 
+    // event will be consumed by x-router
     this.fire('x-update-path', {
       page: this.id,
     });

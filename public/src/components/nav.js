@@ -1,5 +1,5 @@
-import CompostMixin from '../../build/libs/compost/compost-mixin.js';
-import CompostRepeatMixin from '../../build/libs/compost/repeat-mixin.js';
+import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
+import CompostRepeatMixin from '../../../node_modules/@lamplightdev/compost/src/repeat-mixin.js';
 
 import './nav-item.js';
 
@@ -9,7 +9,7 @@ class Nav extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
       items: {
         type: Array,
         value: [],
-        observer: 'observeItems'
+        observer: 'observeItems',
       },
 
       current: {
@@ -17,7 +17,7 @@ class Nav extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
         value: null,
         observer: 'observeCurrent',
       },
-    }
+    };
   }
 
   render() {
@@ -68,23 +68,23 @@ class Nav extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
     `);
   }
 
-  getTemplateString(value, key) {
+  getTemplateString() {
     return `
       <x-nav-item></x-nav-item>
     `;
   }
 
-  getKey(value, index) {
+  getKey(value) {
     return value.id;
   }
 
   observeCurrent(oldValue, newValue) {
-    this.$('slot').assignedNodes().forEach((node) => {
-      node.current = newValue === node.id;
+    this.$('slot').assignedNodes().forEach((el) => {
+      el.current = newValue === el.id;
     });
   }
 
-  updateItem(el, value, index) {
+  updateItem(el, value) {
     el.href = `/${value.id}`;
     el.name = value.name;
     el.id = value.id;

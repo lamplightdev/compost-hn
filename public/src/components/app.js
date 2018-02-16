@@ -1,5 +1,4 @@
-// import 'babel-polyfill/dist/polyfill.js';
-import CompostMixin from '../../build/libs/compost/compost-mixin.js';
+import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
 import './router.js';
 import './nav.js';
 import './view.js';
@@ -7,6 +6,7 @@ import './view.js';
 class App extends CompostMixin(HTMLElement) {
   static get properties() {
     return {
+      // nav items
       nav: {
         type: Array,
         value: [{
@@ -31,15 +31,35 @@ class App extends CompostMixin(HTMLElement) {
         observer: 'observeNav',
       },
 
+      // holds cached API results
+      cache: {
+        type: Object,
+        value: {
+          items: {},
+          lists: {
+            news: {},
+            newest: {},
+            show: {},
+            ask: {},
+            jobs: {},
+          },
+          maxAge: 60 * 1000 * 1,
+        },
+      },
+
+      // the page currently shown
       currentPage: {
         type: Object,
         value: {
+          // page id
           id: null,
+          // for lists, the current page of results
+          // for stories, the storyId
           subId: null,
         },
         observer: 'observeCurrentPage',
-      }
-    }
+      },
+    };
   }
 
   render() {
@@ -70,6 +90,7 @@ class App extends CompostMixin(HTMLElement) {
 
     this.$('x-nav').current = newValue.id;
     this.$('x-view').current = newValue;
+    this.$('x-view').cache = this.cache;
   }
 }
 

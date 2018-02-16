@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+const functions = require('firebase-functions');
+const fetch = require('node-fetch');
+
+exports.preload = functions.https.onRequest((req, res) => {
+  const url = 'https://node-hnapi.herokuapp.com/news?page=1';
+
+  fetch(url)
+    .then(response => response.json())
+    .then((items) => {
+      res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
+      res.status(200).send(`<!DOCTYPE html>
 <html lang="en-GB" dir="ltr">
 
 <head>
@@ -152,16 +162,33 @@
 
     // the comment below get's replaced in a production build with a preloaded
     // list of items for the front page
-    // preload-cache
+    
+      document.querySelector('x-app').cache = {
+        items: {},
+        lists: {
+          news: {
+            '1': {
+              list: ${JSON.stringify(items)},
+              time: Date.now(),
+            }
+          },
+          newest: {},
+          show: {},
+          ask: {},
+          jobs: {},
+        },
+        maxAge: 60 * 1000 * 10,
+      };
+    
 
     // cutting the mustard for native Web Component support
     if (document.head.createShadowRoot || document.head.attachShadow) {
-      loadScript('/js/app.js');
+      loadScript('/js/app-1518817709642.js');
     } else {
       // use polyfill
       loadScript('/libs/webcomponentsjs/webcomponents-loader.js');
       window.addEventListener('WebComponentsReady', function () {
-        loadScript('/js/app.js');
+        loadScript('/js/app-1518817709642.js');
       });
     }
 
@@ -175,3 +202,6 @@
 </body>
 
 </html>
+`);
+    });
+});

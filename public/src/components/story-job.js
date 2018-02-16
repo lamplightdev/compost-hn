@@ -1,5 +1,8 @@
 import StoryMixin from './story-mixin.js';
 
+/**
+ * Element to story summary for 'job' type
+*/
 class StoryJob extends StoryMixin(HTMLElement) {
   render() {
     return `${super.render()}

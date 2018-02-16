@@ -1,5 +1,8 @@
 import StoryMixin from './story-mixin.js';
 
+/**
+ * Element to story summary for 'ask' type
+*/
 class StoryAsk extends StoryMixin(HTMLElement) {
   render() {
     return `${super.render()}

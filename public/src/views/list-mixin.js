@@ -1,34 +1,47 @@
-import CompostMixin from '../../build/libs/compost/compost-mixin.js';
+import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
 import '../components/loading.js';
 import API from '../utility/api.js';
 import '../components/stories.js';
 import globalStyles from '../utility/styles.js';
 
-const ListMixin = (parent) => {
-  return class extends CompostMixin(parent) {
+/**
+ * A base mixin for all lists of story summaries
+ */
+const ListMixin = parent => (
+  class extends CompostMixin(parent) {
     static get properties() {
       return {
+        // if the current list is currently loading
         loading: {
           type: Boolean,
           value: false,
           observer: 'observeLoading',
         },
 
+        // the array of story summarydata
         items: {
           type: Array,
           value: [],
           observer: 'observeItems',
         },
 
+        // which page of the list is being shown
         startIndex: {
           type: Number,
           observer: 'observeStartIndex',
         },
 
+        // is this view currently active?
         active: {
           type: Boolean,
           value: false,
           observer: 'observeActive',
+        },
+
+        // cache passed through from view
+        cache: {
+          type: Object,
+          value: {},
         },
       };
     }
@@ -37,7 +50,11 @@ const ListMixin = (parent) => {
       super();
 
       this._api = new API();
+
+      // how many summaries to show per page
       this._limit = 30;
+
+      // which story type is being shown
       this._type = 'news';
     }
 
@@ -75,8 +92,8 @@ const ListMixin = (parent) => {
         <x-stories id="stories"></x-stories>
 
         <div id="paging" hidden>
-          <a id="previous" href="" on-click="goPrevious" hidden>previous</a>
-          <a id="more" href="" on-click="goMore">more</a>
+          <a id="previous" href="" on-click="goPrevious" hidden>previous page</a>
+          <a id="more" href="" on-click="goMore">next page</a>
         </div>
       `;
     }
@@ -114,6 +131,7 @@ const ListMixin = (parent) => {
         this.$id.previous.hidden = false;
       }
 
+      // if this view is active, load stories
       if (this.active) {
         this._loadStories();
       }
@@ -143,15 +161,15 @@ const ListMixin = (parent) => {
       });
     }
 
-     _loadStories() {
+    _loadStories() {
       this.loading = true;
 
-      this._api.getList(this._type, this.startIndex + 1).then((items) => {
+      this._api.getList(this._type, this.startIndex + 1, this.cache).then((items) => {
         this.items = items;
         this.loading = false;
       });
     }
-  };
-}
+  }
+);
 
 export default ListMixin;

@@ -1,5 +1,5 @@
-import CompostMixin from '../../build/libs/compost/compost-mixin.js';
-import API from '../utility/api.js'
+import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
+import API from '../utility/api.js';
 import globalStyles from '../utility/styles.js';
 import '../components/comments.js';
 
@@ -17,10 +17,17 @@ class Story extends CompostMixin(HTMLElement) {
         value: null,
       },
 
+      // is this view active
       active: {
         type: Boolean,
         value: false,
         observer: 'observeActive',
+      },
+
+      // cache passed from view
+      cache: {
+        type: Object,
+        value: {},
       },
     };
   }
@@ -94,7 +101,7 @@ class Story extends CompostMixin(HTMLElement) {
     } else {
       this.loading = true;
 
-      this._api.getItem(this.storyId).then((story) => {
+      this._api.getItem(this.storyId, this.cache).then((story) => {
         this.$id.title.textContent = story.title;
         if (story.url.indexOf('http') === 0) {
           this.$id.title.href = story.url;
@@ -126,7 +133,7 @@ class Story extends CompostMixin(HTMLElement) {
           this.$id.domain.textContent = '';
           this.$id.content.innerHTML = story.content;
         } else {
-        this.$id.domain.textContent = `| ${story.domain}`;
+          this.$id.domain.textContent = `| ${story.domain}`;
           this.$id.content.innerHTML = '';
         }
 

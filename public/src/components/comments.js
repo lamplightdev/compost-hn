@@ -1,10 +1,11 @@
-import CompostMixin from '../../build/libs/compost/compost-mixin.js';
-import CompostRepeatMixin from '../../build/libs/compost/repeat-mixin.js';
+import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
+import CompostRepeatMixin from '../../../node_modules/@lamplightdev/compost/src/repeat-mixin.js';
 import './comment.js';
 
 class Comments extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
   static get properties() {
     return Object.assign(super.properties, {
+      // how deep these comments are nested
       depth: {
         type: Number,
         value: 0,
@@ -29,17 +30,17 @@ class Comments extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
     `);
   }
 
-  getTemplateString(value, index) {
+  getTemplateString() {
     return `
       <x-comment></x-comment>
     `;
   }
 
-  getKey(value, index) {
+  getKey(value) {
     return value.id;
   }
 
-  updateItem(el, value, index) {
+  updateItem(el, value) {
     el.data = value;
     el.depth = this.depth + 1;
   }
