@@ -30,6 +30,11 @@ const ListMixin = (parent) => {
           value: false,
           observer: 'observeActive',
         },
+
+        cache: {
+          type: Object,
+          value: {},
+        },
       };
     }
 
@@ -146,7 +151,7 @@ const ListMixin = (parent) => {
     _loadStories() {
       this.loading = true;
 
-      this._api.getList(this._type, this.startIndex + 1).then((items) => {
+      this._api.getList(this._type, this.startIndex + 1, this.cache).then((items) => {
         this.items = items;
         this.loading = false;
       });

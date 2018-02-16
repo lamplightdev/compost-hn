@@ -33,15 +33,6 @@ exports.preload = functions.https.onRequest((req, res) => {
 
   <link rel="icon" href="/images/logo.svg">
 
-  
-      <script>
-        var compostHnPreload = {
-          time: ${now},
-          list: ${JSON.stringify(items)}
-        }
-      </script>
-    
-
   <style>
     html {
       font-family: Roboto, -apple-system, sans-serif;
@@ -167,18 +158,39 @@ exports.preload = functions.https.onRequest((req, res) => {
       document.querySelector('head').appendChild(script);
     }
 
+    
+      <script>
+        document.querySelector('x-app').cache = {
+          items: {},
+          lists: {
+            news: {
+              '1': {
+                list: ${JSON.stringify(items)},
+                time: ${now},
+              }
+            },
+            newest: {},
+            show: {},
+            ask: {},
+            jobs: {},
+          },
+          maxAge: 60 * 1000 * 10,
+        };
+      </script>
+    
+
     if (document.head.createShadowRoot || document.head.attachShadow) {
-      loadScript('/js/app-1518778790331.js');
+      loadScript('/js/app-1518782018962.js');
     } else {
       loadScript('/libs/webcomponentsjs/webcomponents-loader.js');
       window.addEventListener('WebComponentsReady', function () {
-        loadScript('/js/app-1518778790331.js');
+        loadScript('/js/app-1518782018962.js');
       });
     }
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        // navigator.serviceWorker.register('/sw.js');
+        navigator.serviceWorker.register('/sw.js');
       });
     }
   </script>

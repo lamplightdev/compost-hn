@@ -22,6 +22,11 @@ class Story extends CompostMixin(HTMLElement) {
         value: false,
         observer: 'observeActive',
       },
+
+      cache: {
+        type: Object,
+        value: {},
+      },
     };
   }
 
@@ -94,7 +99,7 @@ class Story extends CompostMixin(HTMLElement) {
     } else {
       this.loading = true;
 
-      this._api.getItem(this.storyId).then((story) => {
+      this._api.getItem(this.storyId, this.cache).then((story) => {
         this.$id.title.textContent = story.title;
         if (story.url.indexOf('http') === 0) {
           this.$id.title.href = story.url;

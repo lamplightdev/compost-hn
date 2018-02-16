@@ -31,6 +31,21 @@ class App extends CompostMixin(HTMLElement) {
         observer: 'observeNav',
       },
 
+      cache: {
+        type: Object,
+        value: {
+          items: {},
+          lists: {
+            news: {},
+            newest: {},
+            show: {},
+            ask: {},
+            jobs: {},
+          },
+          maxAge: 60 * 1000 * 10,
+        },
+      },
+
       currentPage: {
         type: Object,
         value: {
@@ -70,6 +85,7 @@ class App extends CompostMixin(HTMLElement) {
 
     this.$('x-nav').current = newValue.id;
     this.$('x-view').current = newValue;
+    this.$('x-view').cache = this.cache;
   }
 }
 

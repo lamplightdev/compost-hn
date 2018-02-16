@@ -64,15 +64,27 @@ const replacements = [{
   files: ['functions/index.js', 'build/public/sw.js'],
   replace: [{
     from: /\[\[html\]\]/,
-    to: html,
+    to: html.replace(/`/g, '\`'),
   }, {
-    from: '<!-- preload -->',
+    from: '// preload-cache',
     to: `
       <script>
-        var compostHnPreload = {
-          time: \${now},
-          list: \${JSON.stringify(items)}
-        }
+        document.querySelector('x-app').cache = {
+          items: {},
+          lists: {
+            news: {
+              '1': {
+                list: \${JSON.stringify(items)},
+                time: \${now},
+              }
+            },
+            newest: {},
+            show: {},
+            ask: {},
+            jobs: {},
+          },
+          maxAge: 60 * 1000 * 10,
+        };
       </script>
     `,
   }, {

@@ -20,8 +20,6 @@
 
   <link rel="icon" href="/images/logo.svg">
 
-  <!-- preload -->
-
   <style>
     html {
       font-family: Roboto, -apple-system, sans-serif;
@@ -147,6 +145,8 @@
       document.querySelector('head').appendChild(script);
     }
 
+    // preload-cache
+
     if (document.head.createShadowRoot || document.head.attachShadow) {
       loadScript('/js/app.js');
     } else {
@@ -158,7 +158,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        // navigator.serviceWorker.register('/sw.js');
+        navigator.serviceWorker.register('/sw.js');
       });
     }
   </script>

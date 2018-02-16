@@ -18,6 +18,11 @@ class View extends CompostMixin(HTMLElement) {
         },
         observer: 'observeCurrent',
       },
+
+      cache: {
+        type: Object,
+        value: {},
+      },
     };
   }
 
@@ -54,6 +59,8 @@ class View extends CompostMixin(HTMLElement) {
   observeCurrent(oldValue, newValue) {
     [...this.$$('.view')].forEach((view) => {
       if (view.id === newValue.id) {
+        view.cache = this.cache;
+
         if (view.id === 'story') {
           this.$id[newValue.id].storyId = newValue.subId;
         } else {
