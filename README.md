@@ -1,8 +1,10 @@
 # compost-hn
 
-> A HackerNews PWA implementation using WebComponents and [compost](https://github.com/lamplightdev/compost-hn) - a small collection of web component mixins
+> A [Hacker News PWA](https://hnpwa.com/) implementation using WebComponents and [compost](https://github.com/lamplightdev/compost-hn) - a small collection of web component mixins
 
 Uses the unofficial HackerNews API [node-hnapi](https://github.com/cheeaun/node-hnapi).
+
+See [https://compost-35844.firebaseapp.com/top/](https://compost-35844.firebaseapp.com/top/) for a live production build.
 
 ## Build
 
@@ -23,7 +25,9 @@ Currently geared towards firebase hosting.
 
 `npm install`
 
-`npm run build:dev`
+`npm run build:prod`
+
+`firebase deploy`
 
 This does the same as the dev build but creates a separate `build` directory for deploying, creates a firebase function to preload and cache API results for the root page, and sets cache control for static assets.
 
