@@ -1,5 +1,4 @@
 import StoryMixin from './story-mixin.js';
-import globalStyles from '../utility/styles.js';
 
 class StoryLink extends StoryMixin(HTMLElement) {
   render() {

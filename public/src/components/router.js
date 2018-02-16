@@ -40,7 +40,9 @@ class Router extends CompostMixin(HTMLElement) {
   onNavigate() {
     this.path = window.location.pathname;
 
-    let [, page, subPage] = this.path.split('/');
+    let [, page] = this.path.split('/');
+    const [, , subPage] = this.path.split('/');
+
     if (page === 'index.html') {
       page = '';
     }
@@ -57,9 +59,9 @@ class Router extends CompostMixin(HTMLElement) {
     this.path = `/${page}/${subPage || ''}`;
 
     if (replace) {
-      history.replaceState({}, '', this.path);
+      window.history.replaceState({}, '', this.path);
     } else {
-      history.pushState({}, '', this.path);
+      window.history.pushState({}, '', this.path);
     }
 
     const app = this.$('slot').assignedNodes()[1];
@@ -71,7 +73,7 @@ class Router extends CompostMixin(HTMLElement) {
   }
 
   render() {
-    return `<slot></slot>`;
+    return '<slot></slot>';
   }
 }
 

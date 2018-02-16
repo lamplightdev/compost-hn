@@ -31,6 +31,8 @@ exports.preload = functions.https.onRequest((req, res) => {
   <meta name="msapplication-starturl" content="/">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <meta name="description" content="A HackerNews reader built using compost">
+
   <link rel="icon" href="/images/logo.svg">
 
   <style>
@@ -178,11 +180,11 @@ exports.preload = functions.https.onRequest((req, res) => {
     
 
     if (document.head.createShadowRoot || document.head.attachShadow) {
-      loadScript('/js/app-1518794911435.js');
+      loadScript('/js/app-1518796319138.js');
     } else {
       loadScript('/libs/webcomponentsjs/webcomponents-loader.js');
       window.addEventListener('WebComponentsReady', function () {
-        loadScript('/js/app-1518794911435.js');
+        loadScript('/js/app-1518796319138.js');
       });
     }
 

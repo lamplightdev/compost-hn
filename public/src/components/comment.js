@@ -8,7 +8,7 @@ class Comment extends CompostMixin(HTMLElement) {
       data: {
         type: Object,
         value: null,
-        observer: 'observeData'
+        observer: 'observeData',
       },
 
       showComments: {

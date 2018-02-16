@@ -24,6 +24,9 @@
     "@webcomponents/webcomponentsjs": "^1.1.0"
   },
   "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
     "fs-extra": "^5.0.0",
     "rollup": "^0.55.5",
     "rollup-plugin-uglify": "^3.0.0",

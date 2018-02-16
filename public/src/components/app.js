@@ -53,8 +53,8 @@ class App extends CompostMixin(HTMLElement) {
           subId: null,
         },
         observer: 'observeCurrentPage',
-      }
-    }
+      },
+    };
   }
 
   render() {

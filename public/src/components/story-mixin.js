@@ -1,14 +1,14 @@
 import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
 import globalStyles from '../utility/styles.js';
 
-const StoryMixin = (parent) => {
-  return class extends CompostMixin(parent) {
+const StoryMixin = parent => (
+  class extends CompostMixin(parent) {
     static get properties() {
       return {
         data: {
           type: Object,
           value: {},
-          observer: 'observeData'
+          observer: 'observeData',
         },
 
         type: {
@@ -83,6 +83,6 @@ const StoryMixin = (parent) => {
       });
     }
   }
-}
+);
 
 export default StoryMixin;

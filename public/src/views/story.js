@@ -1,5 +1,5 @@
 import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
-import API from '../utility/api.js'
+import API from '../utility/api.js';
 import globalStyles from '../utility/styles.js';
 import '../components/comments.js';
 
@@ -131,7 +131,7 @@ class Story extends CompostMixin(HTMLElement) {
           this.$id.domain.textContent = '';
           this.$id.content.innerHTML = story.content;
         } else {
-        this.$id.domain.textContent = `| ${story.domain}`;
+          this.$id.domain.textContent = `| ${story.domain}`;
           this.$id.content.innerHTML = '';
         }
 

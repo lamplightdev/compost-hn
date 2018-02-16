@@ -23,8 +23,8 @@ class NavItem extends CompostMixin(HTMLElement) {
         type: Boolean,
         value: false,
         observer: 'observeCurrent',
-      }
-    }
+      },
+    };
   }
 
   render() {

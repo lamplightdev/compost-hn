@@ -25,7 +25,7 @@ class Stories extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
     `);
   }
 
-  getTemplateString(value, index) {
+  getTemplateString(value) {
     let type = value.type;
 
     if (type === 'link' && !value.domain) {
@@ -37,7 +37,7 @@ class Stories extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
     `;
   }
 
-  getKey(value, index) {
+  getKey(value) {
     return value.id;
   }
 

@@ -22,20 +22,20 @@
     ],
     "headers": [
       {
+        "source": "**/*.@(png|svg|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=2419200"
+          }
+        ]
+      },
+      {
         "source": "sw.js",
         "headers": [
           {
             "key": "Cache-Control",
             "value": "max-age=0"
-          }
-        ]
-      },
-      {
-        "source": "**/*.@(png|svg|js)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=604800"
           }
         ]
       }

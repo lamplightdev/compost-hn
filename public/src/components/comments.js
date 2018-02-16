@@ -29,17 +29,17 @@ class Comments extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
     `);
   }
 
-  getTemplateString(value, index) {
+  getTemplateString() {
     return `
       <x-comment></x-comment>
     `;
   }
 
-  getKey(value, index) {
+  getKey(value) {
     return value.id;
   }
 
-  updateItem(el, value, index) {
+  updateItem(el, value) {
     el.data = value;
     el.depth = this.depth + 1;
   }

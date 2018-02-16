@@ -4,8 +4,8 @@ import API from '../utility/api.js';
 import '../components/stories.js';
 import globalStyles from '../utility/styles.js';
 
-const ListMixin = (parent) => {
-  return class extends CompostMixin(parent) {
+const ListMixin = parent => (
+  class extends CompostMixin(parent) {
     static get properties() {
       return {
         loading: {
@@ -80,8 +80,8 @@ const ListMixin = (parent) => {
         <x-stories id="stories"></x-stories>
 
         <div id="paging" hidden>
-          <a id="previous" href="" on-click="goPrevious" hidden>previous</a>
-          <a id="more" href="" on-click="goMore">more</a>
+          <a id="previous" href="" on-click="goPrevious" hidden>previous page</a>
+          <a id="more" href="" on-click="goMore">next page</a>
         </div>
       `;
     }
@@ -156,7 +156,7 @@ const ListMixin = (parent) => {
         this.loading = false;
       });
     }
-  };
-}
+  }
+);
 
 export default ListMixin;
