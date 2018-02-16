@@ -168,17 +168,17 @@ exports.preload = functions.https.onRequest((req, res) => {
     }
 
     if (document.head.createShadowRoot || document.head.attachShadow) {
-      loadScript('/js/app-1518735870311.js');
+      loadScript('/js/app-1518778790331.js');
     } else {
       loadScript('/libs/webcomponentsjs/webcomponents-loader.js');
       window.addEventListener('WebComponentsReady', function () {
-        loadScript('/js/app-1518735870311.js');
+        loadScript('/js/app-1518778790331.js');
       });
     }
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js');
+        // navigator.serviceWorker.register('/sw.js');
       });
     }
   </script>

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c && workbox copyLibraries build/public/libs"
+    "build:dev": "rollup -c rollup.config.dev.js && workbox copyLibraries public/libs",
+    "build:prod": "rollup -c && workbox copyLibraries build/public/libs"
   },
   "repository": {
     "type": "git",

@@ -8,6 +8,7 @@ fs.emptyDirSync('build');
 fs.ensureDirSync('build/public/images');
 fs.ensureDirSync('build/public/js');
 fs.ensureDirSync('build/public/libs');
+fs.ensureDirSync('build/public/libs/webcomponentsjs');
 
 const filesToCopy = [{
   from: 'functions/index-template.js',
@@ -33,6 +34,24 @@ const filesToCopy = [{
 }, {
   from: 'public/manifest.json',
   to: 'build/public/manifest.json',
+}, {
+  from: './node_modules/@webcomponents/webcomponentsjs/webcomponents-hi-ce.js',
+  to: 'build/public/libs/webcomponentsjs/webcomponents-hi-ce.js',
+}, {
+  from: './node_modules/@webcomponents/webcomponentsjs/webcomponents-hi-sd-ce.js',
+  to: 'build/public/libs/webcomponentsjs/webcomponents-hi-sd-ce.js',
+}, {
+  from: './node_modules/@webcomponents/webcomponentsjs/webcomponents-hi-sd.js',
+  to: 'build/public/libs/webcomponentsjs/webcomponents-hi-sd.js',
+}, {
+  from: './node_modules/@webcomponents/webcomponentsjs/webcomponents-hi.js',
+  to: 'build/public/libs/webcomponentsjs/webcomponents-hi.js',
+}, {
+  from: './node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
+  to: 'build/public/libs/webcomponentsjs/webcomponents-loader.js',
+}, {
+  from: './node_modules/@webcomponents/webcomponentsjs/webcomponents-sd-ce.js',
+  to: 'build/public/libs/webcomponentsjs/webcomponents-sd-ce.js',
 }];
 
 filesToCopy.forEach((file) => {
