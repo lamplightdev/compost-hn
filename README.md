@@ -1,8 +1,8 @@
 # compost-hn
 
-> A [Hacker News PWA](https://hnpwa.com/) implementation using WebComponents and [compost](https://github.com/lamplightdev/compost-hn) - a small collection of web component mixins
+> A [Hacker News PWA](https://hnpwa.com/) implementation using native Web Components and [compost](https://github.com/lamplightdev/compost-hn) - a small collection of web component mixins.
 
-Uses the unofficial HackerNews API [node-hnapi](https://github.com/cheeaun/node-hnapi).
+Uses the unofficial HackerNews API [node-hnapi](https://github.com/cheeaun/node-hnapi), and works on all modern browsers.
 
 See [https://compost-35844.firebaseapp.com/top/](https://compost-35844.firebaseapp.com/top/) for a live production build.
 
