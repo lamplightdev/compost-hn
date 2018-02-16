@@ -4,7 +4,7 @@
 
 Uses the unofficial HackerNews API [node-hnapi](https://github.com/cheeaun/node-hnapi), and works on all modern browsers.
 
-See [https://compost-35844.firebaseapp.com/top/](https://compost-35844.firebaseapp.com/top/) for a live production build.
+See [https://compost-35844.firebaseapp.com](https://compost-35844.firebaseapp.com/top/) for a live production build.
 
 ## Build
 
