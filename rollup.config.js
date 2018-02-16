@@ -14,9 +14,6 @@ const filesToCopy = [{
   from: 'functions/index-template.js',
   to: 'functions/index.js',
 }, {
-  from: 'public/index.html',
-  to: 'build/public/index.html',
-}, {
   from: 'public/images/logo.svg',
   to: `build/public/images/logo.svg`,
 }, {
@@ -92,12 +89,6 @@ const replacements = [{
     from: /\[\[rev\]\]/g,
     to: now,
   }],
-}, {
-  files: ['build/public/index.html'],
-  replace: [{
-    from: /\/js\/app\.js/g,
-    to: `/js/app-${now}.js`,
-  }],
 }];
 
 replacements.forEach((replacement) => {
@@ -108,7 +99,7 @@ replacements.forEach((replacement) => {
     });
     fs.writeFileSync(file, input);
   });
-});;
+});
 
 export default {
   input: './public/src/components/app.js',

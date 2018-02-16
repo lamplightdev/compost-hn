@@ -8,16 +8,8 @@
     ],
     "rewrites": [
       {
-        "source": "/",
-        "function": "preload"
-      },
-      {
-        "source": "/top/",
-        "function": "preload"
-      },
-      {
         "source": "**",
-        "destination": "/index.html"
+        "function": "preload"
       }
     ],
     "headers": [

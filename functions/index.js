@@ -183,12 +183,12 @@ exports.preload = functions.https.onRequest((req, res) => {
 
     // cutting the mustard for native Web Component support
     if (document.head.createShadowRoot || document.head.attachShadow) {
-      loadScript('/js/app-1518817709642.js');
+      loadScript('/js/app-1518822719899.js');
     } else {
       // use polyfill
       loadScript('/libs/webcomponentsjs/webcomponents-loader.js');
       window.addEventListener('WebComponentsReady', function () {
-        loadScript('/js/app-1518817709642.js');
+        loadScript('/js/app-1518822719899.js');
       });
     }
 
