@@ -1,22 +1,27 @@
 import CompostMixin from '../../../node_modules/@lamplightdev/compost/src/compost-mixin.js';
 import globalStyles from '../utility/styles.js';
-
+/**
+ * Base class for story summaries
+*/
 const StoryMixin = parent => (
   class extends CompostMixin(parent) {
     static get properties() {
       return {
+        // story day
         data: {
           type: Object,
           value: {},
           observer: 'observeData',
         },
 
+        // type of story
         type: {
           type: String,
           value: null,
           reflectToAttribute: true,
         },
 
+        // which story number this is
         index: {
           type: Number,
           value: 0,
@@ -77,6 +82,7 @@ const StoryMixin = parent => (
     navigate(event) {
       event.preventDefault();
 
+      // load story
       this.fire('x-update-path', {
         page: 'story',
         subPage: this.data.id,

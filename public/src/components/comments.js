@@ -5,6 +5,7 @@ import './comment.js';
 class Comments extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
   static get properties() {
     return Object.assign(super.properties, {
+      // how deep these comments are nested
       depth: {
         type: Number,
         value: 0,

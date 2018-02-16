@@ -7,9 +7,13 @@ import '../views/job.js';
 import '../views/story.js';
 import '../views/about.js';
 
+/**
+ * Element to control which view to show
+*/
 class View extends CompostMixin(HTMLElement) {
   static get properties() {
     return {
+      // data about current view
       current: {
         type: Object,
         value: {
@@ -19,17 +23,12 @@ class View extends CompostMixin(HTMLElement) {
         observer: 'observeCurrent',
       },
 
+      // cache to hold stories / lists
       cache: {
         type: Object,
         value: {},
       },
     };
-  }
-
-  constructor() {
-    super();
-
-    this._loadedViews = {};
   }
 
   render() {
@@ -56,6 +55,7 @@ class View extends CompostMixin(HTMLElement) {
     `;
   }
 
+  // fired when current view changes
   observeCurrent(oldValue, newValue) {
     [...this.$$('.view')].forEach((view) => {
       if (view.id === newValue.id) {

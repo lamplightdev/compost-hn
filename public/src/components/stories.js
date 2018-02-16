@@ -4,9 +4,13 @@ import './story-link.js';
 import './story-ask.js';
 import './story-job.js';
 
+/**
+ * Element to show a list of stories
+*/
 class Stories extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
   static get properties() {
     return Object.assign(super.properties, {
+      // which number to start counting from
       start: {
         type: Number,
         value: 0,
@@ -26,6 +30,7 @@ class Stories extends CompostRepeatMixin(CompostMixin(HTMLElement)) {
   }
 
   getTemplateString(value) {
+    // return the correct element based on story type
     let type = value.type;
 
     if (type === 'link' && !value.domain) {

@@ -5,18 +5,21 @@ import './comments.js';
 class Comment extends CompostMixin(HTMLElement) {
   static get properties() {
     return {
+      // comment data
       data: {
         type: Object,
         value: null,
         observer: 'observeData',
       },
 
+      // are sub comments currently
       showComments: {
         type: Boolean,
         value: false,
         observer: 'observeShowComments',
       },
 
+      // how deeply nested this comment is
       depth: {
         type: Number,
         value: 0,
@@ -72,6 +75,7 @@ class Comment extends CompostMixin(HTMLElement) {
     `;
   }
 
+  // update comment data
   observeData(oldValue, newValue) {
     if (!newValue) return;
 
@@ -94,6 +98,7 @@ class Comment extends CompostMixin(HTMLElement) {
     this.$id.comments.depth = newValue;
   }
 
+  // update hide/show comments
   observeShowComments(oldValue, newValue) {
     if (newValue) {
       this.$id.comments.classList.remove('hide');

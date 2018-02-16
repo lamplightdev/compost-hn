@@ -4,33 +4,41 @@ import API from '../utility/api.js';
 import '../components/stories.js';
 import globalStyles from '../utility/styles.js';
 
+/**
+ * A base mixin for all lists of story summaries
+ */
 const ListMixin = parent => (
   class extends CompostMixin(parent) {
     static get properties() {
       return {
+        // if the current list is currently loading
         loading: {
           type: Boolean,
           value: false,
           observer: 'observeLoading',
         },
 
+        // the array of story summarydata
         items: {
           type: Array,
           value: [],
           observer: 'observeItems',
         },
 
+        // which page of the list is being shown
         startIndex: {
           type: Number,
           observer: 'observeStartIndex',
         },
 
+        // is this view currently active?
         active: {
           type: Boolean,
           value: false,
           observer: 'observeActive',
         },
 
+        // cache passed through from view
         cache: {
           type: Object,
           value: {},
@@ -42,7 +50,11 @@ const ListMixin = parent => (
       super();
 
       this._api = new API();
+
+      // how many summaries to show per page
       this._limit = 30;
+
+      // which story type is being shown
       this._type = 'news';
     }
 
@@ -119,6 +131,7 @@ const ListMixin = parent => (
         this.$id.previous.hidden = false;
       }
 
+      // if this view is active, load stories
       if (this.active) {
         this._loadStories();
       }

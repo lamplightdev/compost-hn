@@ -1,3 +1,6 @@
+/**
+ * API to fetch HN lists and stories, and update passed cache
+*/
 class API {
   constructor() {
     this._apiRoot = 'https://node-hnapi.herokuapp.com';

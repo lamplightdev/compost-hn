@@ -67,6 +67,7 @@ class NavItem extends CompostMixin(HTMLElement) {
   navigate(event) {
     event.preventDefault();
 
+    // event will be consumed by x-router
     this.fire('x-update-path', {
       page: this.id,
     });

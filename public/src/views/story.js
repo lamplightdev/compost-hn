@@ -17,12 +17,14 @@ class Story extends CompostMixin(HTMLElement) {
         value: null,
       },
 
+      // is this view active
       active: {
         type: Boolean,
         value: false,
         observer: 'observeActive',
       },
 
+      // cache passed from view
       cache: {
         type: Object,
         value: {},
