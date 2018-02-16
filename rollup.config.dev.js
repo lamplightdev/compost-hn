@@ -36,6 +36,7 @@ export default {
   output: {
     file: `./public/js/app.js`,
     format: 'iife',
+    sourcemap: true,
   },
   plugins: [
   ]

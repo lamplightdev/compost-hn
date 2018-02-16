@@ -159,32 +159,30 @@ exports.preload = functions.https.onRequest((req, res) => {
     }
 
     
-      <script>
-        document.querySelector('x-app').cache = {
-          items: {},
-          lists: {
-            news: {
-              '1': {
-                list: ${JSON.stringify(items)},
-                time: ${now},
-              }
-            },
-            newest: {},
-            show: {},
-            ask: {},
-            jobs: {},
+      document.querySelector('x-app').cache = {
+        items: {},
+        lists: {
+          news: {
+            '1': {
+              list: ${JSON.stringify(items)},
+              time: ${now},
+            }
           },
-          maxAge: 60 * 1000 * 10,
-        };
-      </script>
+          newest: {},
+          show: {},
+          ask: {},
+          jobs: {},
+        },
+        maxAge: 60 * 1000 * 10,
+      };
     
 
     if (document.head.createShadowRoot || document.head.attachShadow) {
-      loadScript('/js/app-1518782018962.js');
+      loadScript('/js/app-1518794911435.js');
     } else {
       loadScript('/libs/webcomponentsjs/webcomponents-loader.js');
       window.addEventListener('WebComponentsReady', function () {
-        loadScript('/js/app-1518782018962.js');
+        loadScript('/js/app-1518794911435.js');
       });
     }
 

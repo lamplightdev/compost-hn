@@ -68,24 +68,22 @@ const replacements = [{
   }, {
     from: '// preload-cache',
     to: `
-      <script>
-        document.querySelector('x-app').cache = {
-          items: {},
-          lists: {
-            news: {
-              '1': {
-                list: \${JSON.stringify(items)},
-                time: \${now},
-              }
-            },
-            newest: {},
-            show: {},
-            ask: {},
-            jobs: {},
+      document.querySelector('x-app').cache = {
+        items: {},
+        lists: {
+          news: {
+            '1': {
+              list: \${JSON.stringify(items)},
+              time: \${now},
+            }
           },
-          maxAge: 60 * 1000 * 10,
-        };
-      </script>
+          newest: {},
+          show: {},
+          ask: {},
+          jobs: {},
+        },
+        maxAge: 60 * 1000 * 10,
+      };
     `,
   }, {
     from: /\/js\/app\.js/g,
@@ -117,6 +115,7 @@ export default {
   output: {
     file: `./build/public/js/app-${now}.js`,
     format: 'iife',
+    sourcemap: true,
   },
   plugins: [
     uglify(),
