@@ -7,6 +7,7 @@ exports.preload = functions.https.onRequest((req, res) => {
   fetch(url)
     .then(response => response.json())
     .then((items) => {
+      const time = Date.now() + (5 * 60 * 1000);
       res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
       res.status(200).send(`[[html]]`);
     });

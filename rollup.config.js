@@ -71,7 +71,7 @@ const replacements = [{
           news: {
             '1': {
               list: \${JSON.stringify(items)},
-              time: Date.now(),
+              time: \${time},
             }
           },
           newest: {},
