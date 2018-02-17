@@ -7,6 +7,7 @@ exports.preload = functions.https.onRequest((req, res) => {
   fetch(url)
     .then(response => response.json())
     .then((items) => {
+      const time = Date.now() + (5 * 60 * 1000);
       res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
       res.status(200).send(`<!DOCTYPE html>
 <html lang="en-GB" dir="ltr">
@@ -169,7 +170,7 @@ exports.preload = functions.https.onRequest((req, res) => {
           news: {
             '1': {
               list: ${JSON.stringify(items)},
-              time: Date.now(),
+              time: ${time},
             }
           },
           newest: {},
@@ -183,12 +184,12 @@ exports.preload = functions.https.onRequest((req, res) => {
 
     // cutting the mustard for native Web Component support
     if (document.head.createShadowRoot || document.head.attachShadow) {
-      loadScript('/js/app-1518822719899.js');
+      loadScript('/js/app-1518855374326.js');
     } else {
       // use polyfill
       loadScript('/libs/webcomponentsjs/webcomponents-loader.js');
       window.addEventListener('WebComponentsReady', function () {
-        loadScript('/js/app-1518822719899.js');
+        loadScript('/js/app-1518855374326.js');
       });
     }
 
