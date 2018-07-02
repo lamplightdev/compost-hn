@@ -29,6 +29,9 @@ const filesToCopy = [{
   from: 'public/sw.js',
   to: 'build/public/sw.js',
 }, {
+  from: 'public/robots.txt',
+  to: 'build/public/robots.txt',
+}, {
   from: 'public/manifest.json',
   to: 'build/public/manifest.json',
 }, {
