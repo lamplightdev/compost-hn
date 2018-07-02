@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const fetch = require('node-fetch');
 
 exports.preload = functions.https.onRequest((req, res) => {
-  const url = 'https://node-hnapi.herokuapp.com/news?page=1';
+  const url = 'https://api.hnpwa.com/v0/news/1.json';
 
   fetch(url)
     .then(response => response.json())

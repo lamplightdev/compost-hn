@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const fetch = require('node-fetch');
 
 exports.preload = functions.https.onRequest((req, res) => {
-  const url = 'https://node-hnapi.herokuapp.com/news?page=1';
+  const url = 'https://api.hnpwa.com/v0/news/1.json';
 
   fetch(url)
     .then(response => response.json())
@@ -184,12 +184,12 @@ exports.preload = functions.https.onRequest((req, res) => {
 
     // cutting the mustard for native Web Component support
     if (document.head.createShadowRoot || document.head.attachShadow) {
-      loadScript('/js/app-1518855374326.js');
+      loadScript('/js/app-1530539372534.js');
     } else {
       // use polyfill
       loadScript('/libs/webcomponentsjs/webcomponents-loader.js');
       window.addEventListener('WebComponentsReady', function () {
-        loadScript('/js/app-1518855374326.js');
+        loadScript('/js/app-1530539372534.js');
       });
     }
 

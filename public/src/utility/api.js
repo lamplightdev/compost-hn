@@ -3,7 +3,7 @@
 */
 class API {
   constructor() {
-    this._apiRoot = 'https://node-hnapi.herokuapp.com';
+    this._apiRoot = 'https://api.hnpwa.com/v0';
   }
 
   async getItem(id, cache) {
@@ -15,7 +15,7 @@ class API {
       }
     }
 
-    const item = await fetch(`${this._apiRoot}/item/${id}`)
+    const item = await fetch(`${this._apiRoot}/item/${id}.json`)
       .then(response => response.json());
 
     cache.items[item.id] = {
@@ -34,7 +34,7 @@ class API {
       }
     }
 
-    const list = await fetch(`${this._apiRoot}/${type}?page=${page}`)
+    const list = await fetch(`${this._apiRoot}/${type}/${page}.json`)
       .then(response => response.json());
 
     cache.lists[type][page] = {
