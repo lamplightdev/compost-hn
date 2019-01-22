@@ -7,7 +7,7 @@ class StoryLink extends StoryMixin(HTMLElement) {
   render() {
     return `${super.render()}
       <div>
-        <h4><a id="title" href=""></a></h4>
+        <h4><a id="title" target="_blank" rel="noopener" href=""></a></h4>
         <span id="score"></span> by <a id="by" href=""></a>
         <span id="time"></span>
         | <a href="" id="comments" on-click="navigate"></a>
