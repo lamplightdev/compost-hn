@@ -82,11 +82,15 @@ const StoryMixin = parent => (
     navigate(event) {
       event.preventDefault();
 
-      // load story
-      this.fire('x-update-path', {
-        page: 'story',
-        subPage: this.data.id,
-      });
+      if (event.target.href.indexOf('http') === 0) {
+        window.open(event.target.href, '_blank', 'noopener');
+      } else {
+        // load story
+        this.fire('x-update-path', {
+          page: 'story',
+          subPage: this.data.id,
+        });
+      }
     }
   }
 );

@@ -7,7 +7,7 @@ class StoryJob extends StoryMixin(HTMLElement) {
   render() {
     return `${super.render()}
       <div>
-        <h4><a id="title" target="_blank" rel="noopener" href=""></a></h4>
+        <h4><a id="title" href="" on-click="navigate"></a></h4>
         <span id="time"></span>
         | <span id="domain"></span>
       </div>
