@@ -82,13 +82,13 @@ const StoryMixin = parent => (
     navigate(event) {
       event.preventDefault();
 
-      if (event.target.href.indexOf('http') === 0) {
-        window.open(event.target.href, '_blank', 'noopener');
+      if (event.target.href.indexOf('https://compost-35844.firebaseapp.com') !== 0) {
+        window.open(event.target.href, '_blank').opener = null;
       } else {
         // load story
         this.fire('x-update-path', {
           page: 'story',
-          subPage: this.data.id,
+          subPage: this.data.id
         });
       }
     }
