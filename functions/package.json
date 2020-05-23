@@ -1,6 +1,9 @@
 {
   "name": "functions",
   "description": "Cloud Functions for Firebase",
+  "engines": {
+    "node": "10"
+  },
   "scripts": {
     "serve": "firebase serve --only functions",
     "shell": "firebase experimental:functions:shell",
@@ -9,8 +12,8 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
-    "firebase-admin": "~5.8.1",
-    "firebase-functions": "^0.8.1",
+    "firebase-admin": "^8.12.1",
+    "firebase-functions": "^3.6.1",
     "node-fetch": "^2.0.0"
   },
   "private": true
